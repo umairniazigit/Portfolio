@@ -168,22 +168,19 @@
         }
 
         section h2::after {
-            content: '';
-            position: absolute;
-            left: 0;
-            bottom: -10px;
-            /* Space between heading and line */
-            width: 0;
-            height: 2px;
-            background-color: #333333;
-            /* Line color */
-            transition: width 0.5s ease-in-out;
-        }
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -10px; /* Space between heading and line */
+    width: 0;
+    height: 2px;
+    background-color: #333333; /* Line color */
+    transition: width 0.5s ease-in-out;
+}
 
-        section.active h2::after {
-            width: 100%;
-            /* Draw line when section is active */
-        }
+section.active h2::after {
+    width: 100%; /* Draw line when section is active */
+}
 
         section p {
             text-align: left;
@@ -733,6 +730,38 @@
             });
         }
 
+document.addEventListener('DOMContentLoaded', function() {
+    const sections = document.querySelectorAll('section');
+
+    function isElementInViewport(el) {
+        const rect = el.getBoundingClientRect();
+        return (
+            rect.top >= 0 &&
+            rect.left >= 0 &&
+            
+            rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+        );
+    }
+
+    function onScroll() {
+        let activeSectionFound = false;
+
+        sections.forEach(section => {
+            if (isElementInViewport(section) && !activeSectionFound) {
+                section.classList.add('active');
+                activeSectionFound = true;
+            } else {
+                section.classList.remove('active');
+            }
+        });
+    }
+
+    window.addEventListener('scroll', onScroll);
+    window.addEventListener('resize', onScroll);
+
+    // Initial check in case any sections are in view on page load
+    onScroll();
+});
 
 
         document.addEventListener("DOMContentLoaded", function () {
