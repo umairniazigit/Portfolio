@@ -26,14 +26,15 @@
             background-color: #009688; /* Vibrant Teal */
             padding: 10px 0;
             animation: slideIn 2s ease-in;
+            flex-wrap: wrap;
         }
         nav a {
             background-color: #E0F2F1; /* Very Light Teal */
             color: #003366;
-            margin: 0 15px;
+            margin: 5px;
             text-decoration: none;
             font-weight: bold;
-            padding: 10px 20px;
+            padding: 10px 15px;
             border-radius: 5px;
             transition: background-color 0.3s, color 0.3s;
             position: relative;
@@ -66,7 +67,7 @@
             padding: 40px 20px;
             animation: fadeIn 2s ease-in;
             margin: 0 auto;
-            max-width: 900px; /* Center align and limit width */
+            max-width: 90%; /* Adjust width to fit smaller screens */
             position: relative;
             overflow: hidden; /* Ensure line stays within the section */
         }
@@ -85,8 +86,8 @@
             background-color: #009688; /* Line color */
             transition: width 0.5s ease-in-out;
         }
-        section:hover h2::after, section:focus-within h2::after {
-            width: 100%; /* Draw line when section is hovered or focused */
+        section.active h2::after {
+            width: 100%; /* Draw line when section is active */
         }
         section p {
             text-align: left; /* Left align descriptions */
@@ -120,13 +121,41 @@
         .contact-info {
             text-align: center;
             margin: 0 auto;
-            max-width: 900px;
+            max-width: 90%; /* Adjust width to fit smaller screens */
         }
         .contact-info h2 {
             margin-bottom: 20px;
         }
         .contact-info p {
             margin: 10px 0;
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            nav {
+                flex-direction: column;
+            }
+            nav a {
+                margin: 5px 0;
+                padding: 10px;
+            }
+            section {
+                padding: 20px 10px;
+            }
+        }
+        @media (max-width: 480px) {
+            header {
+                padding: 15px;
+            }
+            nav a {
+                padding: 8px;
+            }
+            section {
+                padding: 15px 5px;
+            }
+            footer {
+                padding: 10px 5px;
+            }
         }
     </style>
 </head>
@@ -181,5 +210,30 @@
     <footer>
         <p>&copy; 2024 Muhammad Umair</p>
     </footer>
+    <script>
+        function isInViewport(element) {
+            const rect = element.getBoundingClientRect();
+            return (
+                rect.top >= 0 &&
+                rect.left >= 0 &&
+                rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+                rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+            );
+        }
+
+        function handleScroll() {
+            const sections = document.querySelectorAll('section');
+            sections.forEach(section => {
+                if (isInViewport(section)) {
+                    section.classList.add('active');
+                } else {
+                    section.classList.remove('active');
+                }
+            });
+        }
+
+        window.addEventListener('scroll', handleScroll);
+        window.addEventListener('load', handleScroll); // Check on page load
+    </script>
 </body>
 </html>
