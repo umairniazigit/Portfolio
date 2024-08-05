@@ -7,15 +7,16 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #F5F7FA;
-            color: #333;
+            background-color: #FFFFFF ;
+            color: #333333;
             margin: 0;
             padding: 0;
             overflow-x: hidden;
+ color: #000000;
         }
         header {
-            background-color: #003366; /* Deep Blue */
-            color: #FFFFFF;
+            background-color: #F5F5F5; /* Deep Blue */
+            color: #333333;
             padding: 20px;
             text-align: center;
             animation: fadeIn 2s ease-in;
@@ -23,14 +24,14 @@
         nav {
             display: flex;
             justify-content: center;
-            background-color: #009688; /* Vibrant Teal */
+            background-color: #E0E0E0 ; /* Vibrant Teal */
             padding: 10px 0;
             animation: slideIn 2s ease-in;
             flex-wrap: wrap;
         }
         nav a {
-            background-color: #E0F2F1; /* Very Light Teal */
-            color: #003366;
+            background-color: #F5F5F5; /* Very Light Teal */
+            color: #000000;
             margin: 5px;
             text-decoration: none;
             font-weight: bold;
@@ -65,8 +66,8 @@
         }
         section {
             padding: 40px 20px;
-            animation: fadeIn 2s ease-in;
             margin: 0 auto;
+            background-color : #FFFFFF ; 
             max-width: 90%; /* Adjust width to fit smaller screens */
             position: relative;
             overflow: hidden; /* Ensure line stays within the section */
@@ -74,6 +75,7 @@
         section h2 {
             text-align: center; /* Center align headings */
             margin-bottom: 20px;
+	color: #333333; 
             position: relative; /* Create space for the line animation */
         }
         section h2::after {
@@ -83,7 +85,7 @@
             bottom: -10px; /* Space between heading and line */
             width: 0;
             height: 2px;
-            background-color: #009688; /* Line color */
+            background-color: #333333; /* Line color */
             transition: width 0.5s ease-in-out;
         }
         section.active h2::after {
@@ -94,7 +96,7 @@
             margin: 0 0 20px; /* Add bottom margin for spacing */
         }
         footer {
-            background-color: #003366; /* Deep Blue */
+            background-color: #F5F5F5; /* Deep Blue */
             color: #FFFFFF;
             text-align: center;
             padding: 15px 20px;
@@ -110,24 +112,32 @@
             from { transform: translateY(-20px); }
             to { transform: translateY(0); }
         }
-        .experience-item {
+        .experience-item, .project-item {
             margin-bottom: 20px;
             text-align: left;
         }
-        .experience-item h4 {
+        .experience-item h4, .project-item h4 {
             margin: 0 0 10px;
             font-size: 1.1em;
         }
-        .contact-info {
+        .contact-info, .projects-info {
             text-align: center;
             margin: 0 auto;
-            max-width: 90%; /* Adjust width to fit smaller screens */
+            max-width: 100%; /* Adjust width to fit smaller screens */
         }
-        .contact-info h2 {
+        .contact-info h2, .projects-info h2 {
             margin-bottom: 20px;
         }
-        .contact-info p {
+        .contact-info p, .projects-info p {
             margin: 10px 0;
+        }
+        .projects-info a {
+            color: #009688;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .projects-info a:hover {
+            text-decoration: underline;
         }
         
         /* Responsive Styles */
@@ -168,6 +178,7 @@
         <a href="#about">About Me</a>
         <a href="#offer">What I Offer</a>
         <a href="#experience">Experience</a>
+        <a href="#projects">Projects</a>
         <a href="#contact">Contact</a>
     </nav>
     <section id="about">
@@ -191,10 +202,91 @@
         <div class="experience-item">
             <h4>Incignite - Game Developer (May - Oct 2023)</h4>
             <p>Contributed to game development projects, further enriching my skills.</p>
+        </div>        
+        <div class="experience-item">
+            <h4>Ah Games Studio - Game Developer (May 2023 - May 2024)</h4>
+            <p>Contributed to game development projects, advancing my proficiency with Unity.</p>
         </div>
         <div class="experience-item">
-            <h4>Ah Games Studio - Game Developer (May 2023 - Present)</h4>
-            <p>Currently working at Ah Games Studio, advancing my proficiency with Unity.</p>
+            <h4>Five River Solutions - Game Developer (April 2024 - Present)</h4>
+            <p>Currently working at Five River Solutions, Gaining more experience with game development.</p>
+        </div>
+    </section>
+    <section id="projects">
+        <div class="projects-info">
+            <h2>Projects</h2>
+            <p>These are some of the games I’ve made in my career:</p>
+            <div class="project-item">
+                <h4><a href="https://play.google.com/store/apps/details?id=com.taycoongames.bullfighter.offline.game&hl=en&gl=US" target="_blank">Bull Fighting Game: Bull Games</a></h4>
+                <p>Worked on controller, game flow, and size and performance optimization on this simulation game.</p>
+            </div>
+            <div class="project-item">
+                <h4><a href="https://play.google.com/store/apps/details?id=com.incignite.bussimulator.busgames.busdrivinggames" target="_blank">Public Bus: Transport Game 2023</a></h4>
+                <p>Worked on RCC controller to make a Bus simulation game, including size and performance optimization.</p>
+            </div>
+            <div class="project-item">
+                <h4><a href="https://play.google.com/store/apps/details?id=com.funrealms.carparking.games.parking.car.game" target="_blank">Car Parking 3D: Car Games 2023</a></h4>
+                <p>Worked on RCC controller, level designing, and UI implementation.</p>
+            </div>
+            <div class="project-item">
+                <h4><a href="https://play.google.com/store/apps/details?id=com.funrealms.monster.truck.simulator.game" target="_blank">Monster Truck Games — 3D Stunt</a></h4>
+                <p>Worked on RCC controller, level designing, and UI implementation.</p>
+            </div>
+            <div class="project-item">
+                <h4><a href="https://play.google.com/store/apps/details?id=com.action.game.best.sniper.gun.shooting.games.pure.sniper3d" target="_blank">Sniper 3D・Gun Shooting Games</a></h4>
+                <p>Worked on controller and weapons system.</p>
+            </div>
+            <div class="project-item">
+                <h4><a href="https://play.google.com/store/apps/details?id=com.frs.dog.petsimulator.games" target="_blank">Wild Dog Pet Simulator Games</a></h4>
+                <p>Worked on Wild Dog Pet Simulator Game. Its an animal simulator. I gave updates for this project.</p>
+            </div>
+            <div class="project-item">
+                <h4><a href="https://play.google.com/store/apps/details?id=com.frs.forest.gorilla.simulator" target="_blank">Wild Forest Gorilla Game</a></h4>
+                <p>Its an animal simulation game. In this project I worked on player controller and camera controller. I also updated the google admob ads and applied consent form.</p>
+            </div>
+            <div class="project-item">
+                <h4><a href="https://play.google.com/store/apps/details?id=com.frs.anaconda.angrySnake.Simulator" target="_blank">Snake simulator: Snake Games</a></h4>
+                <p>Its an animal simulation game. In this project I worked on player controller and camera controller. I also updated the google admob ads and applied consent form.</p>
+            </div>
+            <div class="project-item">
+                <h4><a href="https://play.google.com/store/apps/details?id=com.frs.wildcrocodile.attack.simulator2019" target="_blank">Crocodile Games Animal Sim 3D</a></h4>
+                <p>Its an animal simulation game. In this project I worked on player controller and camera controller. I also updated the google admob ads and applied consent form.</p>
+            </div>
+            <div class="project-item">
+                <h4><a href="https://play.google.com/store/apps/details?id=com.frs.bullattack.fighting.bullgames" target="_blank">Wild Battle Craft Bull Games</a></h4>
+                <p>Its an animal simulation game. In this project I worked on player controller and camera controller. I also updated the google admob ads and applied consent form.</p>
+            </div>
+            <div class="project-item">
+                <h4><a href="https://play.google.com/store/apps/details?id=com.frs.furydragon.attack.simulator" target="_blank">Flying Dragon Simulator Games</a></h4>
+                <p>Its an animal simulation game. In this project I worked on player controller and camera controller. I also updated the google admob ads and applied consent form.</p>
+            </div>
+
+            <div class="project-item">
+                <h4><a href="https://play.google.com/store/apps/details?id=com.frs.anaconda.snakeattack.simulator" target="_blank">Angry Anaconda Simulator Games</a></h4>
+                <p>Its an animal simulation game. In this project I worked on player controller and camera controller. I also updated the google admob ads and applied consent form.</p>
+            </div>
+            <div class="project-item">
+                <h4><a href="https://play.google.com/store/apps/details?id=com.frs.wildwolf.animal.simulator" target="_blank">Wolf Simulator Animal Games</a></h4>
+                <p>Its an animal simulation game. In this project I worked on player controller and camera controller. I also updated the google admob ads and applied consent form.</p>
+            </div>
+            <div class="project-item">
+                <h4><a href="https://play.google.com/store/apps/details?id=com.frs.wildanimal.cheetah.simulator" target="_blank">Wild Cheetah Offline Sim Game</a></h4>
+                <p>Its an animal simulation game. In this project I worked on player controller and camera controller. I also updated the google admob ads and applied consent form.</p>
+            </div>
+            <div class="project-item">
+                <h4><a href="https://play.google.com/store/apps/details?id=com.frs.antsimulator.insect.games" target="_blank">Ants Army Simulator: Ant Games</a></h4>
+                <p>Its an animal simulation game. In this project I worked on player controller and camera controller. I also updated the google admob ads and applied consent form.</p>
+            </div>
+            <div class="project-item">
+                <h4><a href="https://play.google.com/store/apps/details?id=com.frs.werewolf.survival.hunting" target="_blank">Forest Wild Werewolf Huntings</a></h4>
+                <p>Its an animal simulation game. In this project I worked on player controller and camera controller. I also updated the google admob ads and applied consent form.</p>
+            </div><div class="project-item">
+                <h4><a href="https://play.google.com/store/apps/details?id=com.frs.mouse.simulator.ratlife" target="_blank">Mouse Animal Life Simulator</a></h4>
+                <p>Its an animal simulation game. In this project I worked on player controller and camera controller. I also updated the google admob ads and applied consent form.</p>
+            </div><div class="project-item">
+                <h4><a href="https://play.google.com/store/apps/details?id=com.frs.scorpion.familysimulator.game" target="_blank">Wild Scorpion Life Simulator</a></h4>
+                <p>Its an animal simulation game. In this project I worked on player controller and camera controller. I also updated the google admob ads and applied consent form.</p>
+            </div>
         </div>
     </section>
     <section id="contact">
@@ -207,7 +299,7 @@
             <p>Address: Rawalpindi, Pakistan</p>
         </div>
     </section>
-    <footer>
+    <footer style="color: #000000;">
         <p>&copy; 2024 Muhammad Umair</p>
     </footer>
     <script>
@@ -223,8 +315,16 @@
 
         function handleScroll() {
             const sections = document.querySelectorAll('section');
+            let activeSection = null;
             sections.forEach(section => {
                 if (isInViewport(section)) {
+                    if (!activeSection || section.getBoundingClientRect().top < activeSection.getBoundingClientRect().top) {
+                        activeSection = section;
+                    }
+                }
+            });
+            sections.forEach(section => {
+                if (section === activeSection) {
                     section.classList.add('active');
                 } else {
                     section.classList.remove('active');
