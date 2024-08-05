@@ -238,16 +238,52 @@ box-shadow: 0 6px 12px rgba(0, 0, 0, 0.5); /* Darker shadow on hover */
 }
 
 .card {
-    flex: 0 0 auto;
-    width: 250px; /* Adjust as needed */
-    margin-right: 20px; /* Space between cards */
-    background-color: #F9F9F9; /* Card background color */
+    background-color: #FFFFFF; /* White background for cards */
     border-radius: 8px; /* Rounded corners */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Light shadow */
-    padding: 20px; /* Inner padding */
-    scroll-snap-align: start; /* Ensure smooth snapping */
-    cursor: grab; /* Change cursor to indicate draggable */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow for card */
+    overflow: hidden; /* Hide overflow of child elements */
+    flex: 0 0 auto; /* Prevent cards from shrinking */
+    width: 80vw; /* Adjust width relative to viewport width */
+    max-width: 300px; /* Maximum width of the card */
+    
+   
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
+    scroll-snap-align: start; /* Optional: for smooth scrolling */
+    padding: 20px;
 }
+
+.card-link {
+    display: flex;
+    flex-direction: column;
+    text-decoration: none; /* Remove underline from links */
+    color: inherit; /* Inherit text color */
+    height: 100%;
+    width: 100%;
+}
+
+.card-image {
+    width: 100%; /* Ensure image covers the card width */
+    height: 60%; /* Fixed height for image */
+    object-fit: cover; /* Ensure image covers its box */
+    display: block;
+}
+
+.card-title, .card-description {
+    padding: 15px; /* Add padding around content */
+}
+
+.card-title {
+    font-size: 1.2em;
+    
+}
+
+.card-description {
+    font-size: 0.9em;
+    
+}
+
 #typing-container {
     display: inline-block;
     font-family: Arial, sans-serif;
@@ -419,29 +455,46 @@ color: #FFFFFF;
        
     <div class="card-container">
         <div class="card">
-            <img src="project1.jpg" alt="Project 1">
-            <h3>Project Title 1</h3>
-            <p>Brief description of Project 1.</p>
+            <a href="https://play.google.com/store/apps/details?id=com.taycoongames.bullfighter.offline.game&hl=en&gl=US"  target="_blank" class="card-link">
+            <img src="imgs/unnamed (2).webp"  width="100%" style=" border-radius: 8px; /* Rounded corners */" alt="Project 1">
+            <h3>Bull Fighting Game: Bull Games</h3>
+            <p style="font-size: 0.9em; color: #666666;" >Control an angry bull in bull simulation attack games. A bull hunt in an animal attack game forced people out of the city. The only way to restore peace in the city is to tame the bull. Various players participate in the bull taming game.</p>
+        </a>
         </div>
         <div class="card">
-            <img src="project2.jpg" alt="Project 2">
-            <h3>Project Title 2</h3>
-            <p>Brief description of Project 2.</p>
+            <a href="https://play.google.com/store/apps/details?id=com.funrealms.carparking.games.parking.car.game"  target="_blank" class="card-link">
+            <img src="imgs/unnamed (1).webp"  width="100%" style=" border-radius: 8px; /* Rounded corners */" alt="Project 1">
+            <h3>Car Parking 3d: Car Games 2023</h3>
+            <p style="font-size: 0.9em; color: #666666;" >Welcome to the future of car parking 3d: car games 2023– an immersive and thrilling adventure that will test your driving skills to the limit. Get ready to rev up your engines and navigate challenging parking scenarios in the most realistic car parking game of the year – Car Parking Drive 3D!</p>
+        </a>
         </div>
         <div class="card">
-            <img src="project3.jpg" alt="Project 3">
-            <h3>Project Title 3</h3>
-            <p>Brief description of Project 3.</p>
+            <a href="https://play.google.com/store/apps/details?id=com.incignite.bussimulator.busgames.busdrivinggames"  target="_blank" class="card-link">
+            <img src="imgs/unnamed.webp"  width="100%" style=" border-radius: 8px; /* Rounded corners */" alt="Project 1">
+            <h3>Public Bus: Transport Game</h3>
+            <p style="font-size: 0.9em; color: #666666;" >Hey Bus Driver Lovers! Welcome to new & updated Bus Simualtor Public Transport Adventure Game 2024. Experience the thrill of being a bus driver in this immersive bus wali game. </p>
+        </a>
         </div>
         <div class="card">
-            <img src="project4.jpg" alt="Project 4">
-            <h3>Project Title 4</h3>
-            <p>Brief description of Project 4.</p>
+            <a href="https://play.google.com/store/apps/details?id=com.frs.forest.gorilla.simulator"  target="_blank" class="card-link">
+            <img src="imgs/gorilla.webp"  width="100%" style=" border-radius: 8px; /* Rounded corners */" alt="Project 1">
+            <h3>Wild Forest Gorilla Games</h3>
+            <p style="font-size: 0.9em; color: #666666;" >Angry Gorilla City Attack 3D Game which is recommended for you. Play this new Angry Gorilla City Attack 3D rampage game to become an angry king Kong rampage city smasher in all angry rampage games.</p>
+        </a>
         </div>
         <div class="card">
-            <img src="project5.jpg" alt="Project 5">
-            <h3>Project Title 5</h3>
-            <p>Brief description of Project 5.</p>
+            <a href="https://play.google.com/store/apps/details?id=com.frs.anaconda.angrySnake.Simulator"  target="_blank" class="card-link">
+            <img src="imgs/s.webp"  width="100%" style=" border-radius: 8px; /* Rounded corners */" alt="Project 1">
+            <h3>Snake simulator: Snake Games</h3>
+            <p style="font-size: 0.9em; color: #666666;" >Top anaconda games and Best Snake games 3d has arrived on Google Play with the extra attacking features of 2020. Anaconda Snake is looking for hunt in this Snake Simulator 2020.</p>
+        </a>
+        </div>
+        <div class="card">
+            <a href="https://play.google.com/store/apps/details?id=com.frs.kittenCat.petSimulator.games"  target="_blank" class="card-link">
+            <img src="imgs/aaa.webp"  width="100%" style=" border-radius: 8px; /* Rounded corners */" alt="Project 1">
+            <h3>Pet Cat Simulator kitty games</h3>
+            <p style="font-size: 0.9em; color: #666666;" >Get ready to play the virtual cat animal simulator & virtual pet games animal adventure family pet cat games. So as real cat games, explore huge houses tommy cat games, awesome parks, and gardens, and choose different kitty games to make a noise in the house in virtual cat simulator games kitten games offline.</p>
+        </a>
         </div>
     </div>
 </section>
