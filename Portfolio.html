@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Muhammad Umair - Unity Game Developer</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #F5F7FA;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+        header {
+            background-color: #003366; /* Deep Blue */
+            color: #FFFFFF;
+            padding: 20px;
+            text-align: center;
+            animation: fadeIn 2s ease-in;
+        }
+        nav {
+            display: flex;
+            justify-content: center;
+            background-color: #009688; /* Vibrant Teal */
+            padding: 10px 0;
+            animation: slideIn 2s ease-in;
+        }
+        nav a {
+            background-color: #E0F2F1; /* Very Light Teal */
+            color: #003366;
+            margin: 0 15px;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 10px 20px;
+            border-radius: 5px;
+            transition: background-color 0.3s, color 0.3s;
+            position: relative;
+        }
+        nav a::before, nav a::after {
+            content: '';
+            position: absolute;
+            width: 0%;
+            height: 2px;
+            background-color: #B2DFDB; /* Light Teal */
+            transition: width 0.3s ease-in-out;
+            z-index: -1;
+        }
+        nav a::before {
+            top: 0;
+            left: 0;
+        }
+        nav a::after {
+            bottom: 0;
+            right: 0;
+        }
+        nav a:hover::before, nav a:hover::after {
+            width: 100%;
+        }
+        nav a:hover {
+            color: #009688;
+            background-color: #E0F2F1; /* Very Light Teal */
+        }
+        section {
+            padding: 40px 20px;
+            animation: fadeIn 2s ease-in;
+            margin: 0 auto;
+            max-width: 900px; /* Center align and limit width */
+            position: relative;
+            overflow: hidden; /* Ensure line stays within the section */
+        }
+        section h2 {
+            text-align: center; /* Center align headings */
+            margin-bottom: 20px;
+            position: relative; /* Create space for the line animation */
+        }
+        section h2::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -10px; /* Space between heading and line */
+            width: 0;
+            height: 2px;
+            background-color: #009688; /* Line color */
+            transition: width 0.5s ease-in-out;
+        }
+        section:hover h2::after, section:focus-within h2::after {
+            width: 100%; /* Draw line when section is hovered or focused */
+        }
+        section p {
+            text-align: left; /* Left align descriptions */
+            margin: 0 0 20px; /* Add bottom margin for spacing */
+        }
+        footer {
+            background-color: #003366; /* Deep Blue */
+            color: #FFFFFF;
+            text-align: center;
+            padding: 15px 20px;
+            position: relative; /* Ensure proper alignment */
+            width: 100%;
+            margin-top: 40px; /* Ensure enough space above the footer */
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes slideIn {
+            from { transform: translateY(-20px); }
+            to { transform: translateY(0); }
+        }
+        .experience-item {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+        .experience-item h4 {
+            margin: 0 0 10px;
+            font-size: 1.1em;
+        }
+        .contact-info {
+            text-align: center;
+            margin: 0 auto;
+            max-width: 800px;
+        }
+        .contact-info h2 {
+            margin-bottom: 20px;
+        }
+        .contact-info p {
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Muhammad Umair</h1>
+        <p>Unity Game Developer</p>
+    </header>
+    <nav>
+        <a href="#about">About Me</a>
+        <a href="#offer">What I Offer</a>
+        <a href="#experience">Experience</a>
+        <a href="#contact">Contact</a>
+    </nav>
+    <section id="about">
+        <h2>Welcome</h2>
+        <p>Hello! 🎮 I’m Muhammad Umair, a Unity game developer. I turn creative ideas into exciting games. Explore my work or start a project with me to bring your vision to life!</p>
+    </section>
+    <section id="offer">
+        <h2>What I Offer</h2>
+        <p>I specialize in hyper-casual games, both 2D and 3D, and simulation games. With a humble yet confident approach, I bring a wealth of experience to the table. Each project is approached with care and creativity, ensuring engaging experiences that captivate audiences. Let's collaborate and bring your gaming visions to life!</p>
+    </section>
+    <section id="experience">
+        <h2>Experience</h2>
+        <div class="experience-item">
+            <h4>MADinc - Game Developer (May - Dec 2022)</h4>
+            <p>Developed games using Unity, honing my skills in game development.</p>
+        </div>
+        <div class="experience-item">
+            <h4>7 Vision Tech - Game Developer (Jan - Apr 2023)</h4>
+            <p>Continued my game development journey, enhancing my expertise in Unity.</p>
+        </div>
+        <div class="experience-item">
+            <h4>Incignite - Game Developer (May - Oct 2023)</h4>
+            <p>Contributed to game development projects, further enriching my skills.</p>
+        </div>
+        <div class="experience-item">
+            <h4>Ah Games Studio - Game Developer (May 2023 - Present)</h4>
+            <p>Currently working at Ah Games Studio, advancing my proficiency with Unity.</p>
+        </div>
+    </section>
+    <section id="contact">
+        <div class="contact-info">
+            <h2>Get in Touch</h2>
+            <p>Let's Connect: Reach out to discuss collaboration opportunities, share ideas, or inquire about my services. I'm eager to hear from you and explore how we can create something amazing together!</p>
+            <p>Phone number: +92-316-1755-475</p>
+            <p>Phone number: +92-306-8885-475</p>
+            <p>Email: <a href="mailto:umairniazi5556@gmail.com">umairniazi5556@gmail.com</a></p>
+            <p>Address: Rawalpindi, Pakistan</p>
+        </div>
+    </section>
+    <footer>
+        <p>&copy; 2024 Muhammad Umair</p>
+    </footer>
+</body>
+</html>
