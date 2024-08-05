@@ -14,6 +14,62 @@
             overflow-x: hidden;
  color: #000000;
         }
+#projects {
+    padding: 40px 20px;
+    background-color: #FFFFFF; /* Light Teal */
+    position: relative;
+}
+
+#projects h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.projects-container {
+    display: flex;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    gap: 20px; /* Space between cards */
+}
+
+.project-card {
+    min-width: 300px;
+    background-color: #F9F9F9 ; /* White */
+    border: 1px solid #CCCCCC; /* Light Gray */
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    text-align: center;
+margin : 10px 10px 10px 10px;
+}
+
+.project-card img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+
+.project-card h3 {
+    margin: 15px 0 10px;
+}
+
+.project-card p {
+    font-size: 0.9em;
+    color: #666666; /* Medium Gray */
+}
+
+.project-card a {
+    display: inline-block;
+    margin-top: 10px;
+    color: #009688; /* Vibrant Teal */
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.project-card a:hover {
+    text-decoration: underline;
+}
+
         header {
             background-color: #F5F5F5; /* Deep Blue */
             color: #333333;
@@ -61,8 +117,8 @@
             width: 100%;
         }
         nav a:hover {
-            color: #009688;
-            background-color: #E0F2F1; /* Very Light Teal */
+            color: #000000;
+            background-color: #E0E0E0; /* Very Light Teal */
         }
         section {
             padding: 40px 20px;
@@ -167,19 +223,85 @@
                 padding: 10px 5px;
             }
         }
+.card-container {
+    display: flex;
+    overflow: hidden; /* Hide the scrollbars */
+    scroll-snap-type: x mandatory; /* Ensure smooth snapping */
+    -webkit-overflow-scrolling: touch; /* Enable smooth scrolling on iOS */
+    padding: 10px 0; /* Adjust as needed */
+}
+
+.card-container::-webkit-scrollbar {
+    display: none; /* Hide scrollbar for WebKit browsers */
+}
+
+.card {
+    flex: 0 0 auto;
+    width: 250px; /* Adjust as needed */
+    margin-right: 20px; /* Space between cards */
+    background-color: #F9F9F9; /* Card background color */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Light shadow */
+    padding: 20px; /* Inner padding */
+    scroll-snap-align: start; /* Ensure smooth snapping */
+    cursor: grab; /* Change cursor to indicate draggable */
+}
+#typing-container {
+    display: inline-block;
+    font-family: Arial, sans-serif;
+}
+
+#typing-text {
+    display: inline-block;
+    font-size: 1em; /* Adjust font size as needed */
+    white-space: nowrap; /* Prevent text from wrapping */
+    overflow: hidden; /* Hide overflow text */
+    border-right: 1.5px solid #333; /* Create the cursor effect */
+    animation: typing 4s steps(30, end), blink 0.75s step-end infinite; /* Typing and cursor blink */
+}
+
+/* Typing animation */
+@keyframes typing {
+    from { width: 0; }
+    to { width: 100%; }
+}
+
+/* Cursor blink animation */
+@keyframes blink {
+    50% { border-color: transparent; }
+}
+
+.download-btn {
+    background-color: #FF5722; /* Vibrant Orange */
+    color: #FFFFFF;
+    
+    padding: 10px 10px;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 50px;
+}
+.download-btn:hover {
+    background-color: #E64A19; /* Darker Orange for hover effect */
+color: #FFFFFF;
+}
     </style>
 </head>
 <body>
     <header>
         <h1>Muhammad Umair</h1>
-        <p>Unity Game Developer</p>
+        <p id="typing-container">
+    <span id="typing-text">Unity Game Developer</span>
+</p>
+
     </header>
     <nav>
         <a href="#about">About Me</a>
         <a href="#offer">What I Offer</a>
         <a href="#experience">Experience</a>
         <a href="#projects">Projects</a>
+        <a href="#FeatureProjects">Feature Projects</a>
         <a href="#contact">Contact</a>
+<a href="path/to/your/resume.pdf" class="download-btn" download>Download Resume</a>
     </nav>
     <section id="about">
         <h2>Welcome</h2>
@@ -289,6 +411,41 @@
             </div>
         </div>
     </section>
+<section id="FeatureProjects">
+    <h2>Featured Projects</h2>
+    <div class="projects-container">
+       
+    <div class="card-container">
+        <div class="card">
+            <img src="project1.jpg" alt="Project 1">
+            <h3>Project Title 1</h3>
+            <p>Brief description of Project 1.</p>
+        </div>
+        <div class="card">
+            <img src="project2.jpg" alt="Project 2">
+            <h3>Project Title 2</h3>
+            <p>Brief description of Project 2.</p>
+        </div>
+        <div class="card">
+            <img src="project3.jpg" alt="Project 3">
+            <h3>Project Title 3</h3>
+            <p>Brief description of Project 3.</p>
+        </div>
+        <div class="card">
+            <img src="project4.jpg" alt="Project 4">
+            <h3>Project Title 4</h3>
+            <p>Brief description of Project 4.</p>
+        </div>
+        <div class="card">
+            <img src="project5.jpg" alt="Project 5">
+            <h3>Project Title 5</h3>
+            <p>Brief description of Project 5.</p>
+        </div>
+    </div>
+</section>
+    </div>
+</section>
+
     <section id="contact">
         <div class="contact-info">
             <h2>Get in Touch</h2>
@@ -334,6 +491,41 @@
 
         window.addEventListener('scroll', handleScroll);
         window.addEventListener('load', handleScroll); // Check on page load
+const container = document.querySelector('.card-container');
+    let isDown = false;
+    let startX;
+    let scrollLeft;
+
+    container.addEventListener('mousedown', (e) => {
+        isDown = true;
+        container.classList.add('active');
+        startX = e.pageX - container.offsetLeft;
+        scrollLeft = container.scrollLeft;
+    });
+
+    container.addEventListener('mouseleave', () => {
+        isDown = false;
+        container.classList.remove('active');
+    });
+
+    container.addEventListener('mouseup', () => {
+        isDown = false;
+        container.classList.remove('active');
+    });
+
+    container.addEventListener('mousemove', (e) => {
+        if (!isDown) return;
+        e.preventDefault();
+        const x = e.pageX - container.offsetLeft;
+        const walk = (x - startX) * 2; // Scroll-fastness multiplier
+        container.scrollLeft = scrollLeft - walk;
+    });
+
+
+document.addEventListener("DOMContentLoaded", function() {
+        const typingText = document.getElementById('typing-text');
+        typingText.style.width = typingText.scrollWidth + 'px'; // Set the width to the scroll width
+    });
     </script>
 </body>
 </html>
