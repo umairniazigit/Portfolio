@@ -1,868 +1,493 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="icon" type="image/x-icon" href="imgs/strategy.png">
-    <title>Muhammad Umair - Unity Game Developer</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #FFFFFF;
-            color: #333333;
-            margin: 0;
-            padding: 0;
-            overflow-x: hidden;
-            color: #000000;
-        }
-
-        #projects {
-            padding: 40px 20px;
-            background-color: #FFFFFF;
-            /* Light Teal */
-            position: relative;
-        }
-
-        #projects h2 {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-
-        .projects-container {
-            display: flex;
-            overflow-x: auto;
-            scroll-behavior: smooth;
-            gap: 20px;
-            /* Space between cards */
-        }
-
-        .project-card {
-            min-width: 300px;
-            background-color: #F9F9F9;
-            /* White */
-            border: 1px solid #CCCCCC;
-            /* Light Gray */
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            padding: 15px;
-            text-align: center;
-            margin: 10px 10px 10px 10px;
-        }
-
-        .project-card img {
-            width: 100%;
-            height: auto;
-            border-radius: 8px;
-        }
-
-        .project-card h3 {
-            margin: 15px 0 10px;
-        }
-
-        .project-card p {
-            font-size: 0.9em;
-            color: #666666;
-            /* Medium Gray */
-        }
-
-        .project-card a {
-            display: inline-block;
-            margin-top: 10px;
-            color: #009688;
-            /* Vibrant Teal */
-            text-decoration: none;
-            font-weight: bold;
-        }
-
-        .project-card a:hover {
-            text-decoration: underline;
-        }
-
-        header {
-            background-color: #F5F5F5;
-            /* Deep Blue */
-            color: #333333;
-            padding: 20px;
-            text-align: center;
-            animation: fadeIn 2s ease-in;
-        }
-
-        nav {
-            display: flex;
-            justify-content: center;
-            background-color: #E0E0E0;
-            /* Vibrant Teal */
-            padding: 10px 0;
-            animation: slideIn 2s ease-in;
-            flex-wrap: wrap;
-        }
-
-        nav a {
-            background-color: #F5F5F5;
-            /* Very Light Teal */
-            color: #000000;
-            margin: 5px;
-            text-decoration: none;
-            font-weight: bold;
-            padding: 10px 15px;
-            border-radius: 5px;
-            transition: background-color 0.3s, color 0.3s;
-            position: relative;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            /* Shadow for the buttons */
-        }
-
-        nav a::before,
-        nav a::after {
-            content: '';
-            position: absolute;
-            width: 0%;
-            height: 2px;
-            background-color: #B2DFDB;
-            /* Light Teal */
-            transition: width 0.3s ease-in-out;
-            z-index: -1;
-        }
-
-        nav a::before {
-            top: 0;
-            left: 0;
-        }
-
-        nav a::after {
-            bottom: 0;
-            right: 0;
-        }
-
-        nav a:hover::before,
-        nav a:hover::after {
-            width: 100%;
-        }
-
-        nav a:hover {
-            color: #000000;
-            background-color: #E0E0E0;
-            /* Very Light Teal */
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.5);
-            /* Darker shadow on hover */
-        }
-
-        section {
-            padding: 40px 20px;
-            margin: 0 auto;
-            background-color: #FFFFFF;
-            max-width: 90%;
-            /* Adjust width to fit smaller screens */
-            position: relative;
-            overflow: hidden;
-            /* Ensure line stays within the section */
-        }
-
-        section h2 {
-            text-align: center;
-            /* Center align headings */
-            margin-bottom: 20px;
-            color: #333333;
-            position: relative;
-            /* Create space for the line animation */
-        }
-
-        section h2::after {
-    content: '';
-    position: absolute;
-    left: 0;
-    bottom: -10px; /* Space between heading and line */
-    width: 0;
-    height: 2px;
-    background-color: #333333; /* Line color */
-    transition: width 0.5s ease-in-out;
-}
-
-section.active h2::after {
-    width: 100%; /* Draw line when section is active */
-}
-
-        section p {
-            text-align: left;
-            /* Left align descriptions */
-            margin: 0 0 20px;
-            /* Add bottom margin for spacing */
-        }
-
-        footer {
-            background-color: #F5F5F5;
-            /* Deep Blue */
-            color: #FFFFFF;
-            text-align: center;
-            padding: 15px 20px;
-            position: relative;
-            /* Ensure proper alignment */
-            width: 100%;
-            margin-top: 40px;
-            /* Ensure enough space above the footer */
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-
-            to {
-                opacity: 1;
-            }
-        }
-
-        @keyframes slideIn {
-            from {
-                transform: translateY(-20px);
-            }
-
-            to {
-                transform: translateY(0);
-            }
-        }
-
-        .experience-item,
-        .project-item {
-            margin-bottom: 20px;
-            text-align: left;
-        }
-
-        .experience-item h4,
-        .project-item h4 {
-            margin: 0 0 10px;
-            font-size: 1.1em;
-        }
-
-        .contact-info,
-        .projects-info {
-            text-align: center;
-            margin: 0 auto;
-            max-width: 100%;
-            /* Adjust width to fit smaller screens */
-        }
-
-        .contact-info h2,
-        .projects-info h2 {
-            margin-bottom: 20px;
-        }
-
-        .contact-info p,
-        .projects-info p {
-            margin: 10px 0;
-        }
-
-        .projects-info a {
-            color: #009688;
-            text-decoration: none;
-            font-weight: bold;
-        }
-
-        .projects-info a:hover {
-            text-decoration: underline;
-        }
-
-        /* Responsive Styles */
-        @media (max-width: 768px) {
-            nav {
-                flex-direction: column;
-            }
-
-            nav a {
-                margin: 5px 0;
-                padding: 10px;
-            }
-
-            section {
-                padding: 20px 10px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            header {
-                padding: 15px;
-            }
-
-            nav a {
-                padding: 8px;
-            }
-
-            section {
-                padding: 15px 5px;
-            }
-
-            footer {
-                padding: 10px 5px;
-            }
-        }
-
-        .projects-container {
-            display: flex;
-            overflow-x: auto;
-            scroll-behavior: smooth;
-            gap: 20px;
-            /* Space between cards */
-            padding: 10px 0;
-            /* Adjust as needed */
-            width: 100%;
-            /* Ensure container takes full width */
-        }
-
-        .projects-container::-webkit-scrollbar {
-            display: none;
-            /* Hide scrollbar for WebKit browsers */
-        }
-
-        .card-container {
-            display: flex;
-            overflow-x: auto;
-            scroll-behavior: smooth;
-            gap: 20px;
-            /* Space between cards */
-            padding: 10px 0;
-            /* Adjust as needed */
-            width: 100%;
-            /* Ensure container takes full width */
-        }
-
-
-
-        .card {
-            background-color: #FFFFFF;
-            /* White background for cards */
-            border-radius: 8px;
-            /* Rounded corners */
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            /* Shadow for card */
-            overflow: hidden;
-            /* Hide overflow of child elements */
-            flex: 0 0 auto;
-            /* Prevent cards from shrinking */
-            width: 80vw;
-            /* Adjust width relative to viewport width */
-            max-width: 300px;
-            /* Maximum width of the card */
-
-
-            display: flex;
-            flex-direction: column;
-            margin: 10px;
-            scroll-snap-align: start;
-            /* Optional: for smooth scrolling */
-            padding: 20px;
-        }
-
-        .card-link {
-            display: flex;
-            flex-direction: column;
-            text-decoration: none;
-            /* Remove underline from links */
-            color: inherit;
-            /* Inherit text color */
-            height: 100%;
-            width: 100%;
-        }
-
-        .card-image {
-            width: 100%;
-            /* Ensure image covers the card width */
-            height: 60%;
-            /* Fixed height for image */
-            object-fit: cover;
-            /* Ensure image covers its box */
-            display: block;
-        }
-
-        .card-title,
-        .card-description {
-            padding: 15px;
-            /* Add padding around content */
-        }
-
-        .card-title {
-            font-size: 1.2em;
-
-        }
-
-        .card-description {
-            font-size: 0.9em;
-
-        }
-
-        #typing-container {
-            display: inline-block;
-            font-family: Arial, sans-serif;
-        }
-
-        #typing-text {
-            display: inline-block;
-            font-size: 1em;
-            /* Adjust font size as needed */
-            white-space: nowrap;
-            /* Prevent text from wrapping */
-            overflow: hidden;
-            /* Hide overflow text */
-            border-right: 1.5px solid #333;
-            /* Create the cursor effect */
-            animation: typing 4s steps(30, end), blink 0.75s step-end infinite;
-            /* Typing and cursor blink */
-        }
-
-        /* Typing animation */
-        @keyframes typing {
-            from {
-                width: 0;
-            }
-
-            to {
-                width: 100%;
-            }
-        }
-
-        /* Cursor blink animation */
-        @keyframes blink {
-            50% {
-                border-color: transparent;
-            }
-        }
-
-        .download-btn {
-            background-color: #FF5722;
-            /* Vibrant Orange */
-            color: #FFFFFF;
-
-            padding: 10px 10px;
-            text-decoration: none;
-            font-weight: bold;
-            border-radius: 50px;
-        }
-
-        .download-btn:hover {
-            background-color: #E64A19;
-            /* Darker Orange for hover effect */
-            color: #FFFFFF;
-        }
-
-
-        .sectionred {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: space-between;
-}
-
-.sectionred .left,
-.sectionred .right {
-    flex: 1;
-    padding: 10px;
-}
-
-.sectionred .left {
-    text-align: left;
-}
-
-.sectionred .right {
-    text-align: right;
-    display: flex;
-    align-items: center; /* Center image vertically */
-    justify-content: center; /* Center image horizontally */
-}
-
-.image-container {
-    
-    height: 400px;
-    width: 400px;
-    overflow: hidden;
-    border-radius: 50%; /* Make the container circular */
-    display: inline-block;
-}
-
-.image-container img {
-    width: 100%;
-    height: auto;
-    transition: opacity 1s ease-in-out; /* Smooth fade-in transition */
-}
-
-/* Media query for mobile devices */
-@media (max-width: 768px) {
-    .sectionred {
-        flex-direction: column;
-        text-align: center; /* Center text on mobile */
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Muhammad Umair — Unity Game Developer portfolio featuring simulation, hyper-casual and mobile game development work.">
+  <meta name="theme-color" content="#080b12">
+  <link rel="icon" type="image/x-icon" href="imgs/strategy.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <title>Muhammad Umair — Unity Game Developer</title>
+  <style>
+    :root {
+      --bg:#080b12;
+      --surface:#0e1420;
+      --surface-2:#121b2a;
+      --text:#f5f7fb;
+      --muted:#98a4b7;
+      --line:rgba(255,255,255,.09);
+      --accent:#78f5c4;
+      --accent-2:#6da8ff;
+      --shadow:0 24px 70px rgba(0,0,0,.34);
+      --radius:26px;
+      --max:1180px;
     }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth;scroll-padding-top:95px}
+    body{margin:0;font-family:Manrope,system-ui,sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden}
+    body::before{content:"";position:fixed;inset:0;pointer-events:none;background:radial-gradient(circle at 12% 15%,rgba(109,168,255,.12),transparent 28%),radial-gradient(circle at 88% 8%,rgba(120,245,196,.1),transparent 24%);z-index:-2}
+    body::after{content:"";position:fixed;inset:0;pointer-events:none;opacity:.025;background-image:linear-gradient(rgba(255,255,255,.8) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.8) 1px,transparent 1px);background-size:42px 42px;z-index:-1}
+    a{color:inherit}
+    img{max-width:100%;display:block}
+    button,input{font:inherit}
+    .container{width:min(calc(100% - 38px),var(--max));margin:auto}
+    .section{padding:110px 0}
+    .section-kicker,.eyebrow{margin:0 0 12px;color:var(--accent);font-size:.77rem;text-transform:uppercase;letter-spacing:.18em;font-weight:800}
+    .section-title{margin:0;font-family:"Space Grotesk",sans-serif;font-size:clamp(2.2rem,5vw,4.6rem);line-height:.98;letter-spacing:-.05em;max-width:850px}
+    .section-copy{max-width:700px;color:var(--muted);line-height:1.8;font-size:1.03rem;margin:22px 0 0}
+    .reveal{opacity:0;transform:translateY(24px);transition:opacity .65s ease,transform .65s ease}
+    .reveal.visible{opacity:1;transform:none}
 
-    .sectionred .left,
-    .sectionred .right {
-        flex: none;
-        width: 100%;
+    #loader{position:fixed;inset:0;background:#080b12;z-index:9999;display:grid;place-items:center;transition:opacity .5s ease,visibility .5s ease}
+    #loader.hide{opacity:0;visibility:hidden}
+    .loader-mark{display:flex;align-items:center;gap:14px;font-family:"Space Grotesk",sans-serif;font-weight:700;letter-spacing:.08em}
+    .loader-dot{width:12px;height:12px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 0 rgba(120,245,196,.5);animation:pulse 1.2s infinite}
+    @keyframes pulse{70%{box-shadow:0 0 0 14px rgba(120,245,196,0)}100%{box-shadow:0 0 0 0 rgba(120,245,196,0)}}
+
+    .site-header{position:fixed;top:0;left:0;right:0;z-index:50;background:rgba(8,11,18,.72);border-bottom:1px solid transparent;backdrop-filter:blur(18px);transition:.3s ease}
+    .site-header.scrolled{border-bottom-color:var(--line)}
+    .nav{height:78px;display:flex;align-items:center;justify-content:space-between;gap:30px}
+    .brand{text-decoration:none;display:flex;align-items:center;gap:12px;font-family:"Space Grotesk",sans-serif;font-weight:700;letter-spacing:-.03em}
+    .brand-mark{width:38px;height:38px;display:grid;place-items:center;border:1px solid var(--line);border-radius:12px;background:linear-gradient(145deg,rgba(120,245,196,.15),rgba(109,168,255,.08));color:var(--accent)}
+    .nav-links{display:flex;align-items:center;gap:26px}
+    .nav-links a{text-decoration:none;color:#c2cad6;font-size:.9rem;font-weight:700;transition:.2s}
+    .nav-links a:hover{color:var(--text)}
+    .resume-link{padding:11px 16px;border:1px solid var(--line);border-radius:999px!important;background:rgba(255,255,255,.035)}
+    .menu-btn{display:none;width:44px;height:44px;border-radius:14px;border:1px solid var(--line);background:var(--surface);color:var(--text)}
+
+    .hero{min-height:100vh;display:flex;align-items:center;padding:140px 0 90px;position:relative}
+    .hero-grid{display:grid;grid-template-columns:1.18fr .82fr;gap:80px;align-items:center}
+    .availability{display:inline-flex;align-items:center;gap:9px;padding:9px 13px;border:1px solid var(--line);border-radius:999px;color:#c8d2df;background:rgba(255,255,255,.03);font-size:.82rem;font-weight:700;margin-bottom:24px}
+    .availability span{width:8px;height:8px;border-radius:50%;background:var(--accent);box-shadow:0 0 14px rgba(120,245,196,.8)}
+    .hero h1{font-family:"Space Grotesk",sans-serif;font-size:clamp(3.6rem,8vw,7.8rem);line-height:.86;letter-spacing:-.075em;margin:0;max-width:850px}
+    .hero h1 .accent{display:block;color:transparent;-webkit-text-stroke:1.5px rgba(245,247,251,.55)}
+    .hero-lead{max-width:670px;color:var(--muted);font-size:clamp(1rem,1.7vw,1.22rem);line-height:1.75;margin:28px 0 0}
+    .hero-actions{display:flex;gap:14px;flex-wrap:wrap;margin-top:34px}
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;text-decoration:none;padding:14px 20px;border-radius:14px;font-weight:800;font-size:.9rem;transition:transform .2s ease,border-color .2s ease,background .2s ease}
+    .btn:hover{transform:translateY(-2px)}
+    .btn-primary{background:var(--accent);color:#06110d}
+    .btn-secondary{border:1px solid var(--line);background:rgba(255,255,255,.035)}
+    .hero-meta{display:flex;gap:34px;flex-wrap:wrap;margin-top:48px;padding-top:30px;border-top:1px solid var(--line)}
+    .stat strong{font-family:"Space Grotesk",sans-serif;font-size:1.55rem}
+    .stat span{display:block;color:var(--muted);font-size:.78rem;margin-top:5px}
+    .profile-shell{position:relative;max-width:430px;margin-left:auto}
+    .profile-shell::before{content:"";position:absolute;inset:-22px;border:1px solid var(--line);border-radius:40px;transform:rotate(4deg)}
+    .profile-card{position:relative;border:1px solid var(--line);background:linear-gradient(145deg,rgba(255,255,255,.07),rgba(255,255,255,.015));padding:15px;border-radius:34px;box-shadow:var(--shadow);overflow:hidden}
+    .profile-card::after{content:"UNITY / GAME DEV";position:absolute;right:-44px;bottom:80px;transform:rotate(-90deg);font-size:.7rem;letter-spacing:.28em;color:rgba(255,255,255,.4);font-weight:800}
+    .profile-card img{width:100%;aspect-ratio:4/5;object-fit:cover;border-radius:24px;filter:saturate(.92)}
+    .profile-caption{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:16px 10px 4px}
+    .profile-caption strong{font-size:.92rem}
+    .profile-caption span{font-size:.78rem;color:var(--muted)}
+
+    .marquee-wrap{border-block:1px solid var(--line);overflow:hidden;background:rgba(255,255,255,.018)}
+    .marquee{display:flex;width:max-content;animation:marquee 26s linear infinite}
+    .marquee span{padding:17px 30px;color:#c8d1dc;font-weight:700;font-size:.82rem;text-transform:uppercase;letter-spacing:.14em;white-space:nowrap}
+    .marquee i{color:var(--accent);font-size:.42rem;margin-right:20px;vertical-align:middle}
+    @keyframes marquee{to{transform:translateX(-50%)}}
+
+    .about-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:80px;align-items:start;margin-top:58px}
+    .about-quote{font-family:"Space Grotesk",sans-serif;font-size:clamp(1.65rem,3vw,2.7rem);line-height:1.22;letter-spacing:-.035em;margin:0}
+    .about-copy p{color:var(--muted);font-size:1.03rem;line-height:1.85;margin:0 0 20px}
+    .skills{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px}
+    .skill{padding:9px 12px;border:1px solid var(--line);border-radius:999px;color:#d9e1ea;background:rgba(255,255,255,.025);font-size:.82rem;font-weight:700}
+
+    .services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:48px}
+    .service-card{min-height:270px;padding:28px;border:1px solid var(--line);border-radius:var(--radius);background:linear-gradient(145deg,rgba(255,255,255,.055),rgba(255,255,255,.015));position:relative;overflow:hidden}
+    .service-card::before{content:"";position:absolute;width:130px;height:130px;border-radius:50%;background:var(--accent);filter:blur(80px);opacity:.08;right:-20px;top:-20px}
+    .service-icon{width:48px;height:48px;border-radius:15px;display:grid;place-items:center;background:rgba(120,245,196,.09);color:var(--accent);border:1px solid rgba(120,245,196,.18)}
+    .service-card h3{font-family:"Space Grotesk",sans-serif;font-size:1.3rem;margin:54px 0 12px}
+    .service-card p{margin:0;color:var(--muted);line-height:1.7;font-size:.93rem}
+
+    .timeline{margin-top:56px;position:relative}
+    .timeline::before{content:"";position:absolute;left:142px;top:10px;bottom:10px;width:1px;background:var(--line)}
+    .timeline-item{display:grid;grid-template-columns:115px 1fr;gap:55px;padding:0 0 42px;position:relative}
+    .timeline-date{color:var(--muted);font-size:.82rem;font-weight:700;text-align:right;padding-top:7px}
+    .timeline-body{position:relative;padding:0 0 0 34px}
+    .timeline-body::before{content:"";position:absolute;left:-34px;top:9px;width:11px;height:11px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 7px rgba(120,245,196,.08)}
+    .timeline-body h3{font-family:"Space Grotesk",sans-serif;font-size:1.35rem;margin:0 0 5px}
+    .timeline-body h4{margin:0 0 10px;color:#c4cfdd;font-size:.9rem}
+    .timeline-body p{margin:0;color:var(--muted);line-height:1.7}
+
+    .featured-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:22px;margin-top:50px}
+    .featured-card{border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;background:linear-gradient(145deg,rgba(255,255,255,.05),rgba(255,255,255,.015));transition:transform .3s ease,border-color .3s ease}
+    .featured-card:hover{transform:translateY(-5px);border-color:rgba(120,245,196,.3)}
+    .project-visual{display:block;position:relative;overflow:hidden;background:#0a101b}
+    .project-visual img{width:100%;aspect-ratio:16/9;object-fit:cover;transition:transform .55s ease}
+    .featured-card:hover .project-visual img{transform:scale(1.035)}
+    .visual-chip{position:absolute;top:16px;right:16px;padding:9px 11px;border-radius:999px;background:rgba(8,11,18,.78);backdrop-filter:blur(10px);font-size:.72rem;font-weight:800;border:1px solid rgba(255,255,255,.12)}
+    .featured-body{padding:26px}
+    .featured-body h3{font-family:"Space Grotesk",sans-serif;font-size:1.5rem;margin:0 0 10px}
+    .featured-body p:not(.eyebrow){color:var(--muted);line-height:1.7;margin:0 0 20px}
+    .text-link{display:inline-flex;align-items:center;gap:9px;text-decoration:none;font-weight:800;font-size:.85rem;color:#dfe6ef}
+    .text-link i{color:var(--accent);transition:transform .2s}
+    .text-link:hover i{transform:translateX(4px)}
+
+    .projects-toolbar{display:flex;align-items:end;justify-content:space-between;gap:24px;margin-top:48px}
+    .search-wrap{width:min(100%,340px);position:relative}
+    .search-wrap i{position:absolute;left:15px;top:50%;transform:translateY(-50%);color:var(--muted)}
+    .search-wrap input{width:100%;padding:13px 15px 13px 42px;border:1px solid var(--line);background:rgba(255,255,255,.03);color:var(--text);border-radius:14px;outline:none}
+    .search-wrap input:focus{border-color:rgba(120,245,196,.45)}
+    .project-count{font-size:.85rem;color:var(--muted)}
+    .all-projects{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:22px}
+    .mini-project{padding:23px;border:1px solid var(--line);border-radius:22px;background:rgba(255,255,255,.025);min-height:250px;display:flex;flex-direction:column;transition:.25s ease}
+    .mini-project:hover{background:rgba(255,255,255,.045);border-color:rgba(109,168,255,.28);transform:translateY(-3px)}
+    .mini-top{display:flex;align-items:center;justify-content:space-between;color:var(--muted);font-size:.78rem}
+    .mini-top a{width:34px;height:34px;border-radius:10px;border:1px solid var(--line);display:grid;place-items:center;text-decoration:none;color:#dfe6ef}
+    .mini-project h3{font-family:"Space Grotesk",sans-serif;font-size:1.1rem;margin:35px 0 12px;line-height:1.25}
+    .mini-project p{color:var(--muted);font-size:.87rem;line-height:1.65;margin:0}
+    .mini-project.hidden{display:none}
+
+    .education-card{margin-top:50px;border:1px solid var(--line);border-radius:32px;overflow:hidden;background:linear-gradient(145deg,rgba(109,168,255,.08),rgba(255,255,255,.015));display:grid;grid-template-columns:.85fr 1.15fr}
+    .edu-side{padding:42px;border-right:1px solid var(--line)}
+    .edu-side h3{font-family:"Space Grotesk",sans-serif;font-size:2rem;margin:0 0 12px}
+    .edu-side p{color:var(--muted);line-height:1.7;margin:0}
+    .edu-list{padding:18px 38px}
+    .edu-row{display:grid;grid-template-columns:180px 1fr;gap:25px;padding:22px 0;border-bottom:1px solid var(--line)}
+    .edu-row:last-child{border-bottom:0}
+    .edu-row strong{font-size:.88rem}
+    .edu-row span{color:var(--muted);font-size:.9rem;line-height:1.55}
+
+    .contact-panel{position:relative;padding:70px;border-radius:38px;border:1px solid var(--line);overflow:hidden;background:linear-gradient(135deg,rgba(120,245,196,.12),rgba(109,168,255,.09) 55%,rgba(255,255,255,.025));box-shadow:var(--shadow)}
+    .contact-panel::after{content:"";position:absolute;width:350px;height:350px;border:1px solid rgba(255,255,255,.08);border-radius:50%;right:-130px;top:-120px}
+    .contact-panel h2{font-family:"Space Grotesk",sans-serif;font-size:clamp(2.7rem,6vw,5.5rem);line-height:.96;letter-spacing:-.055em;max-width:800px;margin:0}
+    .contact-panel>p{max-width:650px;color:#bdc9d7;line-height:1.75;margin:22px 0 34px}
+    .contact-links{display:flex;gap:12px;flex-wrap:wrap;position:relative;z-index:2}
+    .contact-link{display:inline-flex;align-items:center;gap:10px;text-decoration:none;padding:12px 15px;border-radius:13px;background:rgba(8,11,18,.55);border:1px solid rgba(255,255,255,.12);font-size:.85rem;font-weight:700}
+    .contact-link i{color:var(--accent)}
+
+    footer{padding:30px 0 38px}
+    .footer-row{border-top:1px solid var(--line);padding-top:24px;display:flex;justify-content:space-between;gap:20px;color:var(--muted);font-size:.8rem}
+    .back-top{text-decoration:none;color:#d9e2ed;font-weight:700}
+
+    @media (max-width:980px){
+      .nav-links{position:absolute;top:78px;left:19px;right:19px;display:none;flex-direction:column;align-items:stretch;padding:18px;background:#0d1420;border:1px solid var(--line);border-radius:20px;box-shadow:var(--shadow)}
+      .nav-links.open{display:flex}
+      .menu-btn{display:grid;place-items:center}
+      .hero-grid,.about-grid{grid-template-columns:1fr}
+      .hero-grid{gap:70px}
+      .profile-shell{margin:0;max-width:390px}
+      .services-grid{grid-template-columns:1fr 1fr}
+      .all-projects{grid-template-columns:1fr 1fr}
+      .education-card{grid-template-columns:1fr}
+      .edu-side{border-right:0;border-bottom:1px solid var(--line)}
     }
-
-    .sectionred .right {
-        order: -1; /* Move image to the top */
-        text-align: center; /* Center image */
+    @media (max-width:720px){
+      .section{padding:82px 0}
+      .hero{padding-top:118px}
+      .hero h1{font-size:clamp(3.4rem,18vw,5.2rem)}
+      .hero-meta{gap:22px}
+      .services-grid,.featured-grid,.all-projects{grid-template-columns:1fr}
+      .timeline::before{left:8px}
+      .timeline-item{grid-template-columns:1fr;gap:8px;padding-left:34px}
+      .timeline-date{text-align:left;padding:0}
+      .timeline-body{padding-left:0}
+      .timeline-body::before{left:-31px;top:-18px}
+      .projects-toolbar{align-items:stretch;flex-direction:column}
+      .search-wrap{width:100%}
+      .education-card{border-radius:25px}
+      .edu-side{padding:30px}
+      .edu-list{padding:8px 28px}
+      .edu-row{grid-template-columns:1fr;gap:8px}
+      .contact-panel{padding:42px 26px;border-radius:28px}
+      .contact-links{flex-direction:column;align-items:stretch}
+      .contact-link{justify-content:center}
+      .footer-row{flex-direction:column}
+      .profile-card::after{display:none}
     }
-}
-
-    </style>
+    @media (prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}}
+  </style>
 </head>
-
 <body>
-    <header>
-        <h1>Muhammad Umair</h1>
-        <p id="typing-container">
-            <span id="typing-text">Unity Game Developer</span>
-        </p>
+  <div id="loader" aria-hidden="true"><div class="loader-mark"><span class="loader-dot"></span>MU / PORTFOLIO</div></div>
 
-    </header>
-    <nav>
-        <a href="#about">About Me</a>
-        <a href="#offer">What I Offer</a>
-        <a href="#experience">Experience</a>
-        <a href="#projects">Projects</a>
-        <a href="#FeatureProjects">Feature Projects</a>
-        <a href="#contact">Contact</a>
-        <a href="Resume.pdf" class="download-btn" download>Download Resume</a>
-    </nav>
-    <section id="about">
-        <h2>Welcome</h2>
-        <p>Hello! 🎮 I’m Muhammad Umair, a Unity game developer. I turn creative ideas into exciting games. Explore my
-            work or start a project with me to bring your vision to life!</p>
-    </section>
-    <section id="offer">
-        <h2>What I Offer</h2>
-        <p>I specialize in hyper-casual games, both 2D and 3D, and simulation games. With a humble yet confident
-            approach, I bring a wealth of experience to the table. Each project is approached with care and creativity,
-            ensuring engaging experiences that captivate audiences. Let's collaborate and bring your gaming visions to
-            life!</p>
-    </section>
-    <section id="experience">
-        <h2>Experience</h2>
-        <div class="experience-item">
-            <h4>MADinc - Game Developer (May - Dec 2022)</h4>
-            <p>Developed games using Unity, honing my skills in game development.</p>
-        </div>
-        <div class="experience-item">
-            <h4>7 Vision Tech - Game Developer (Jan - Apr 2023)</h4>
-            <p>Continued my game development journey, enhancing my expertise in Unity.</p>
-        </div>
-        <div class="experience-item">
-            <h4>Incignite - Game Developer (May - Oct 2023)</h4>
-            <p>Contributed to game development projects, further enriching my skills.</p>
-        </div>
-        <div class="experience-item">
-            <h4>Ah Games Studio - Game Developer (May 2023 - May 2024)</h4>
-            <p>Contributed to game development projects, advancing my proficiency with Unity.</p>
-        </div>
-        <div class="experience-item">
-            <h4>Five River Solutions - Game Developer (April 2024 - Present)</h4>
-            <p>Currently working at Five River Solutions, Gaining more experience with game development.</p>
-        </div>
-    </section>
-    <section id="projects">
-        <div class="projects-info">
-            <h2>Projects</h2>
-            <p>These are some of the games I’ve made in my career:</p>
-            <div class="project-item">
-                <h4><a href="https://play.google.com/store/apps/details?id=com.taycoongames.bullfighter.offline.game&hl=en&gl=US"
-                        target="_blank">Bull Fighting Game: Bull Games</a></h4>
-                <p>Worked on controller, game flow, and size and performance optimization on this simulation game.</p>
-            </div>
-            <div class="project-item">
-                <h4><a href="https://play.google.com/store/apps/details?id=com.incignite.bussimulator.busgames.busdrivinggames"
-                        target="_blank">Public Bus: Transport Game 2023</a></h4>
-                <p>Worked on RCC controller to make a Bus simulation game, including size and performance optimization.
-                </p>
-            </div>
-            <div class="project-item">
-                <h4><a href="https://play.google.com/store/apps/details?id=com.funrealms.carparking.games.parking.car.game"
-                        target="_blank">Car Parking 3D: Car Games 2023</a></h4>
-                <p>Worked on RCC controller, level designing, and UI implementation.</p>
-            </div>
-            <div class="project-item">
-                <h4><a href="https://play.google.com/store/apps/details?id=com.funrealms.monster.truck.simulator.game"
-                        target="_blank">Monster Truck Games — 3D Stunt</a></h4>
-                <p>Worked on RCC controller, level designing, and UI implementation.</p>
-            </div>
-            <div class="project-item">
-                <h4><a href="https://play.google.com/store/apps/details?id=com.action.game.best.sniper.gun.shooting.games.pure.sniper3d"
-                        target="_blank">Sniper 3D・Gun Shooting Games</a></h4>
-                <p>Worked on controller and weapons system.</p>
-            </div>
-            <div class="project-item">
-                <h4><a href="https://play.google.com/store/apps/details?id=com.frs.dog.petsimulator.games"
-                        target="_blank">Wild Dog Pet Simulator Games</a></h4>
-                <p>Worked on Wild Dog Pet Simulator Game. Its an animal simulator. I gave updates for this project.</p>
-            </div>
-            <div class="project-item">
-                <h4><a href="https://play.google.com/store/apps/details?id=com.frs.forest.gorilla.simulator"
-                        target="_blank">Wild Forest Gorilla Game</a></h4>
-                <p>Its an animal simulation game. In this project I worked on player controller and camera controller. I
-                    also updated the google admob ads and applied consent form.</p>
-            </div>
-            <div class="project-item">
-                <h4><a href="https://play.google.com/store/apps/details?id=com.frs.anaconda.angrySnake.Simulator"
-                        target="_blank">Snake simulator: Snake Games</a></h4>
-                <p>Animal simulation game. In this project i setup player controller, camera controller and setup google ads mediation.</p>
-            </div>
-            <div class="project-item">
-                <h4><a href="https://play.google.com/store/apps/details?id=com.frs.wildcrocodile.attack.simulator2019"
-                        target="_blank">Crocodile Games Animal Sim 3D</a></h4>
-                <p>Its an animal simulation game. In this project I worked on player controller and camera controller. I
-                    also updated the google admob ads and applied consent form.</p>
-            </div>
-            <div class="project-item">
-                <h4><a href="https://play.google.com/store/apps/details?id=com.frs.bullattack.fighting.bullgames"
-                        target="_blank">Wild Battle Craft Bull Games</a></h4>
-                <p>Its an animal simulation game. In this project I worked on player controller and camera controller. I
-                    also updated the google admob ads and applied consent form.</p>
-            </div>
-            <div class="project-item">
-                <h4><a href="https://play.google.com/store/apps/details?id=com.frs.furydragon.attack.simulator"
-                        target="_blank">Flying Dragon Simulator Games</a></h4>
-                <p>Its an animal simulation game. In this project i applied google mobile ads mediation.</p>
-            </div>
-
-            <div class="project-item">
-                <h4><a href="https://play.google.com/store/apps/details?id=com.frs.anaconda.snakeattack.simulator"
-                        target="_blank">Angry Anaconda Simulator Games</a></h4>
-                <p>Its an animal simulation game. In this project I worked on player controller and camera controller. I
-                    also updated the google admob ads and applied consent form.</p>
-            </div>
-            <div class="project-item">
-                <h4><a href="https://play.google.com/store/apps/details?id=com.frs.wildwolf.animal.simulator"
-                        target="_blank">Wolf Simulator Animal Games</a></h4>
-                <p>Its an animal simulation game. I gave updates for this project.</p>
-            </div>
-            <div class="project-item">
-                <h4><a href="https://play.google.com/store/apps/details?id=com.frs.wildanimal.cheetah.simulator"
-                        target="_blank">Wild Cheetah Offline Sim Game</a></h4>
-                <p>Its an animal simulation game. In this project I worked on player controller and camera controller. I
-                    also updated the google admob ads and applied consent form.</p>
-            </div>
-            <div class="project-item">
-                <h4><a href="https://play.google.com/store/apps/details?id=com.frs.antsimulator.insect.games"
-                        target="_blank">Ants Army Simulator: Ant Games</a></h4>
-                <p>Animal simulation game. In this project I worked on player controller and camera controller. I
-                    also updated the google admob ads and applied consent form.</p>
-            </div>
-            <div class="project-item">
-                <h4><a href="https://play.google.com/store/apps/details?id=com.frs.werewolf.survival.hunting"
-                        target="_blank">Forest Wild Werewolf Huntings</a></h4>
-                <p>Animal simulation game. I worked on this project from start to finish from scrach.</p>
-            </div>
-            <div class="project-item">
-                <h4><a href="https://play.google.com/store/apps/details?id=com.frs.mouse.simulator.ratlife"
-                        target="_blank">Mouse Animal Life Simulator</a></h4>
-                <p>Its an animal simulation game. I gave updates for this project.</p>
-            </div>
-            <div class="project-item">
-                <h4><a href="https://play.google.com/store/apps/details?id=com.frs.scorpion.familysimulator.game"
-                        target="_blank">Wild Scorpion Life Simulator</a></h4>
-                <p>Its an animal simulation game. I updated the google admob ads and applied consent form In this game i made the enemie AI system.</p>
-            </div>
-        </div>
-    </section>
-    <section id="FeatureProjects">
-        <h2>Featured Projects</h2>
-        <div class="projects-container">
-
-            <div class="card-container">
-                <div class="card">
-                    <a href="https://play.google.com/store/apps/details?id=com.taycoongames.bullfighter.offline.game&hl=en&gl=US"
-                        target="_blank" class="card-link">
-                        <img src="imgs/unnamed (2).webp" width="100%" style=" border-radius: 8px; /* Rounded corners */"
-                            alt="Project 1">
-                        <h3>Bull Fighting Game: Bull Games</h3>
-                        <p style="font-size: 0.9em; color: #666666;">Control an angry bull in bull simulation attack
-                            games. A bull hunt in an animal attack game forced people out of the city. The only way to
-                            restore peace in the city is to tame the bull. Various players participate in the bull
-                            taming game.</p>
-                    </a>
-                </div>
-                <div class="card">
-                    <a href="https://play.google.com/store/apps/details?id=com.funrealms.carparking.games.parking.car.game"
-                        target="_blank" class="card-link">
-                        <img src="imgs/unnamed (1).webp" width="100%" style=" border-radius: 8px; /* Rounded corners */"
-                            alt="Project 1">
-                        <h3>Car Parking 3d: Car Games 2023</h3>
-                        <p style="font-size: 0.9em; color: #666666;">Welcome to the future of car parking 3d: car games
-                            2023– an immersive and thrilling adventure that will test your driving skills to the limit.
-                            Get ready to rev up your engines and navigate challenging parking scenarios in the most
-                            realistic car parking game of the year – Car Parking Drive 3D!</p>
-                    </a>
-                </div>
-                <div class="card">
-                    <a href="https://play.google.com/store/apps/details?id=com.incignite.bussimulator.busgames.busdrivinggames"
-                        target="_blank" class="card-link">
-                        <img src="imgs/unnamed.webp" width="100%" style=" border-radius: 8px; /* Rounded corners */"
-                            alt="Project 1">
-                        <h3>Public Bus: Transport Game</h3>
-                        <p style="font-size: 0.9em; color: #666666;">Hey Bus Driver Lovers! Welcome to new & updated Bus
-                            Simualtor Public Transport Adventure Game 2024. Experience the thrill of being a bus driver
-                            in this immersive bus wali game. </p>
-                    </a>
-                </div>
-                <div class="card">
-                    <a href="https://play.google.com/store/apps/details?id=com.frs.forest.gorilla.simulator"
-                        target="_blank" class="card-link">
-                        <img src="imgs/gorilla.webp" width="100%" style=" border-radius: 8px; /* Rounded corners */"
-                            alt="Project 1">
-                        <h3>Wild Forest Gorilla Games</h3>
-                        <p style="font-size: 0.9em; color: #666666;">Angry Gorilla City Attack 3D Game which is
-                            recommended for you. Play this new Angry Gorilla City Attack 3D rampage game to become an
-                            angry king Kong rampage city smasher in all angry rampage games.</p>
-                    </a>
-                </div>
-                <div class="card">
-                    <a href="https://play.google.com/store/apps/details?id=com.frs.anaconda.angrySnake.Simulator"
-                        target="_blank" class="card-link">
-                        <img src="imgs/s.webp" width="100%" style=" border-radius: 8px; /* Rounded corners */"
-                            alt="Project 1">
-                        <h3>Snake simulator: Snake Games</h3>
-                        <p style="font-size: 0.9em; color: #666666;">Top anaconda games and Best Snake games 3d has
-                            arrived on Google Play with the extra attacking features of 2020. Anaconda Snake is looking
-                            for hunt in this Snake Simulator 2020.</p>
-                    </a>
-                </div>
-                <div class="card">
-                    <a href="https://play.google.com/store/apps/details?id=com.frs.kittenCat.petSimulator.games"
-                        target="_blank" class="card-link">
-                        <img src="imgs/aaa.webp" width="100%" style=" border-radius: 8px; /* Rounded corners */"
-                            alt="Project 1">
-                        <h3>Pet Cat Simulator kitty games</h3>
-                        <p style="font-size: 0.9em; color: #666666;">Get ready to play the virtual cat animal simulator
-                            & virtual pet games animal adventure family pet cat games. So as real cat games, explore
-                            huge houses tommy cat games, awesome parks, and gardens, and choose different kitty games to
-                            make a noise in the house in virtual cat simulator games kitten games offline.</p>
-                    </a>
-                </div>
-            </div>
-    </section>
+  <header class="site-header" id="top">
+    <div class="container nav">
+      <a class="brand" href="#home"><span class="brand-mark">MU</span><span>Muhammad Umair</span></a>
+      <nav class="nav-links" id="navLinks" aria-label="Primary navigation">
+        <a href="#about">About</a><a href="#services">Expertise</a><a href="#experience">Experience</a><a href="#work">Work</a><a href="#education">Education</a><a href="#contact">Contact</a>
+        <a class="resume-link" href="Resume.pdf" download><i class="fa-solid fa-download"></i> Resume</a>
+      </nav>
+      <button class="menu-btn" id="menuBtn" aria-label="Open navigation"><i class="fa-solid fa-bars"></i></button>
     </div>
-    </section>
-    <section class="sectionred">
-        <div class="left">
-            <h2>Education</h2>
-            <div class="experience-item">
-                <h4>Matriculation</h4>
-                <p>FG boys High School no 1 Tariqabad Rawalpindi.</p>
-            </div>
-            <div class="experience-item">
-                <h4>FSC Pre engineering</h4>
-                <p>Manjan Bazam Cadet College Ghazi Campus Tarbela Cantt.</p>
-            </div>
-            <div class="experience-item">
-                <h4>UET Taxila.</h4>
-                <p>Graduation (BS Computer Science)</p>
-            </div>                    
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="container hero-grid">
+        <div class="reveal">
+          <div class="availability"><span></span> Unity Game Developer · Rawalpindi, Pakistan</div>
+          <h1>Muhammad <span class="accent">Umair.</span></h1>
+          <p class="hero-lead">I build engaging mobile game experiences in Unity, with hands-on work across simulation and hyper-casual games, gameplay controllers, level design, UI, optimization, ads integration and live project updates.</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#work">Explore my work <i class="fa-solid fa-arrow-down"></i></a>
+            <a class="btn btn-secondary" href="mailto:umairniazi5556@gmail.com">Start a conversation <i class="fa-regular fa-envelope"></i></a>
+          </div>
+          <div class="hero-meta">
+            <div class="stat"><strong>18</strong><span>Projects in portfolio</span></div>
+            <div class="stat"><strong>5</strong><span>Studio roles</span></div>
+            <div class="stat"><strong>2022</strong><span>Game-dev journey started</span></div>
+          </div>
         </div>
-        <div class="right">
-            <div class="image-container">
-                <img id="profile-image" src="imgs/pic.webp" alt="Picture">
-            </div>
+        <div class="profile-shell reveal">
+          <div class="profile-card">
+            <img src="imgs/pic.webp" alt="Muhammad Umair" onerror="this.src='imgs/IMG-20211116-WA0002.webp'">
+            <div class="profile-caption"><div><strong>Unity Game Developer</strong><span>Gameplay · Simulation · Mobile</span></div><i class="fa-brands fa-unity"></i></div>
+          </div>
         </div>
+      </div>
     </section>
-    
-    <section id="contact">
-        <div class="contact-info">
-            <h2>Get in Touch</h2>
-            <p>Let's Connect: Reach out to discuss collaboration opportunities, share ideas, or inquire about my
-                services. I'm eager to hear from you and explore how we can create something amazing together!</p>
-            <p>Phone number: +92-316-1755-475</p>
-            <p>Phone number: +92-306-8885-475</p>
-            <p>Email: <a href="mailto:umairniazi5556@gmail.com">umairniazi5556@gmail.com</a></p>
-            <p>Address: Rawalpindi, Pakistan</p>
+
+    <div class="marquee-wrap" aria-hidden="true"><div class="marquee">
+      <span><i class="fa-solid fa-circle"></i>Unity Development</span><span><i class="fa-solid fa-circle"></i>2D / 3D Games</span><span><i class="fa-solid fa-circle"></i>Simulation Games</span><span><i class="fa-solid fa-circle"></i>Gameplay Controllers</span><span><i class="fa-solid fa-circle"></i>Performance Optimization</span><span><i class="fa-solid fa-circle"></i>Google Mobile Ads</span>
+      <span><i class="fa-solid fa-circle"></i>Unity Development</span><span><i class="fa-solid fa-circle"></i>2D / 3D Games</span><span><i class="fa-solid fa-circle"></i>Simulation Games</span><span><i class="fa-solid fa-circle"></i>Gameplay Controllers</span><span><i class="fa-solid fa-circle"></i>Performance Optimization</span><span><i class="fa-solid fa-circle"></i>Google Mobile Ads</span>
+    </div></div>
+
+    <section class="section" id="about">
+      <div class="container">
+        <p class="section-kicker reveal">01 / About</p><h2 class="section-title reveal">Game development with a focus on feel, flow and performance.</h2>
+        <div class="about-grid">
+          <p class="about-quote reveal">I turn game ideas into playable experiences and keep improving them where it matters: controls, systems, levels, UI and performance.</p>
+          <div class="about-copy reveal">
+            <p>I’m Muhammad Umair, a Unity game developer with experience across hyper-casual, 2D, 3D and simulation games. My project work includes player and camera controllers, RCC vehicle systems, game flow, level design, UI implementation, optimization, enemy AI and mobile ads integration.</p>
+            <p>I’ve contributed to multiple studio teams and published mobile projects, handling both new development and ongoing updates.</p>
+            <div class="skills"><span class="skill">Unity</span><span class="skill">2D / 3D</span><span class="skill">Simulation Games</span><span class="skill">Gameplay Controllers</span><span class="skill">RCC</span><span class="skill">Level Design</span><span class="skill">UI Implementation</span><span class="skill">Performance Optimization</span><span class="skill">AdMob / Mediation</span><span class="skill">Enemy AI</span></div>
+          </div>
         </div>
+      </div>
     </section>
-    <footer style="color: #000000;">
-        <p>&copy; 2024 Muhammad Umair</p>
-    </footer>
-    <script>
-        function isInViewport(element) {
-            const rect = element.getBoundingClientRect();
-            return (
-                rect.top >= 0 &&
-                rect.left >= 0 &&
-                rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
-                rect.right <= (window.innerWidth || document.documentElement.clientWidth)
-            );
-        }
 
-        function handleScroll() {
-            const sections = document.querySelectorAll('section');
-            let activeSection = null;
-            sections.forEach(section => {
-                if (isInViewport(section)) {
-                    if (!activeSection || section.getBoundingClientRect().top < activeSection.getBoundingClientRect().top) {
-                        activeSection = section;
-                    }
-                }
-            });
-            sections.forEach(section => {
-                if (section === activeSection) {
-                    section.classList.add('active');
-                } else {
-                    section.classList.remove('active');
-                }
-            });
-        }
+    <section class="section" id="services">
+      <div class="container"><p class="section-kicker reveal">02 / Expertise</p><h2 class="section-title reveal">What I bring to a game project.</h2>
+        <div class="services-grid">
+          <article class="service-card reveal"><div class="service-icon"><i class="fa-solid fa-gamepad"></i></div><h3>Gameplay Systems</h3><p>Player, camera and vehicle controller work with attention to responsive gameplay and smooth game flow.</p></article>
+          <article class="service-card reveal"><div class="service-icon"><i class="fa-solid fa-cubes"></i></div><h3>Level & UI Implementation</h3><p>Building and refining playable levels plus practical in-game UI implementation for mobile game experiences.</p></article>
+          <article class="service-card reveal"><div class="service-icon"><i class="fa-solid fa-gauge-high"></i></div><h3>Optimization & Monetization</h3><p>Size and performance optimization alongside Google AdMob, mediation and consent-form updates for live games.</p></article>
+        </div>
+      </div>
+    </section>
 
-document.addEventListener('DOMContentLoaded', function() {
-    const sections = document.querySelectorAll('section');
+    <section class="section" id="experience">
+      <div class="container"><p class="section-kicker reveal">03 / Experience</p><h2 class="section-title reveal">Studio experience, from early builds to live game updates.</h2>
+        <div class="timeline">
+          <div class="timeline-item reveal"><div class="timeline-date">Apr 2024 — Present</div><div class="timeline-body"><h3>Five River Solutions</h3><h4>Game Developer</h4><p>Currently working on game development projects and expanding hands-on Unity experience.</p></div></div>
+          <div class="timeline-item reveal"><div class="timeline-date">May 2023 — May 2024</div><div class="timeline-body"><h3>Ah Games Studio</h3><h4>Game Developer</h4><p>Contributed to game development projects and advanced practical Unity development skills.</p></div></div>
+          <div class="timeline-item reveal"><div class="timeline-date">May — Oct 2023</div><div class="timeline-body"><h3>Incignite</h3><h4>Game Developer</h4><p>Contributed to game development projects and continued building Unity development expertise.</p></div></div>
+          <div class="timeline-item reveal"><div class="timeline-date">Jan — Apr 2023</div><div class="timeline-body"><h3>7 Vision Tech</h3><h4>Game Developer</h4><p>Worked on Unity game development and strengthened practical production skills.</p></div></div>
+          <div class="timeline-item reveal"><div class="timeline-date">May — Dec 2022</div><div class="timeline-body"><h3>MADinc</h3><h4>Game Developer</h4><p>Developed games using Unity and built the foundation of professional game-development experience.</p></div></div>
+        </div>
+      </div>
+    </section>
 
-    function isElementInViewport(el) {
-        const rect = el.getBoundingClientRect();
-        return (
-            rect.top >= 0 &&
-            rect.left >= 0 &&
-            
-            rect.right <= (window.innerWidth || document.documentElement.clientWidth)
-        );
-    }
+    <section class="section" id="work">
+      <div class="container"><p class="section-kicker reveal">04 / Selected Work</p><h2 class="section-title reveal">Featured games I’ve worked on.</h2><p class="section-copy reveal">A selection of mobile projects from my portfolio, with work spanning controllers, simulation systems, level design, optimization and ads integration.</p>
+        <div class="featured-grid"><article class="featured-card reveal">
+  <a class="project-visual" href="https://play.google.com/store/apps/details?id=com.taycoongames.bullfighter.offline.game&amp;hl=en&amp;gl=US" target="_blank" rel="noopener noreferrer" aria-label="Open Bull Fighting Game: Bull Games on Google Play">
+    <img src="imgs/unnamed (2).webp" alt="Bull Fighting Game: Bull Games game artwork" loading="lazy">
+    <span class="visual-chip">Google Play <i class="fa-solid fa-arrow-up-right-from-square"></i></span>
+  </a>
+  <div class="featured-body">
+    <p class="eyebrow">Featured project</p>
+    <h3>Bull Fighting Game: Bull Games</h3>
+    <p>Gameplay controller, game flow, size and performance optimization.</p>
+    <a class="text-link" href="https://play.google.com/store/apps/details?id=com.taycoongames.bullfighter.offline.game&amp;hl=en&amp;gl=US" target="_blank" rel="noopener noreferrer">View project <i class="fa-solid fa-arrow-right"></i></a>
+  </div>
+</article>
+<article class="featured-card reveal">
+  <a class="project-visual" href="https://play.google.com/store/apps/details?id=com.funrealms.carparking.games.parking.car.game" target="_blank" rel="noopener noreferrer" aria-label="Open Car Parking 3D: Car Games 2023 on Google Play">
+    <img src="imgs/unnamed (1).webp" alt="Car Parking 3D: Car Games 2023 game artwork" loading="lazy">
+    <span class="visual-chip">Google Play <i class="fa-solid fa-arrow-up-right-from-square"></i></span>
+  </a>
+  <div class="featured-body">
+    <p class="eyebrow">Featured project</p>
+    <h3>Car Parking 3D: Car Games 2023</h3>
+    <p>RCC controller, level design and UI implementation.</p>
+    <a class="text-link" href="https://play.google.com/store/apps/details?id=com.funrealms.carparking.games.parking.car.game" target="_blank" rel="noopener noreferrer">View project <i class="fa-solid fa-arrow-right"></i></a>
+  </div>
+</article>
+<article class="featured-card reveal">
+  <a class="project-visual" href="https://play.google.com/store/apps/details?id=com.incignite.bussimulator.busgames.busdrivinggames" target="_blank" rel="noopener noreferrer" aria-label="Open Public Bus: Transport Game on Google Play">
+    <img src="imgs/unnamed.webp" alt="Public Bus: Transport Game game artwork" loading="lazy">
+    <span class="visual-chip">Google Play <i class="fa-solid fa-arrow-up-right-from-square"></i></span>
+  </a>
+  <div class="featured-body">
+    <p class="eyebrow">Featured project</p>
+    <h3>Public Bus: Transport Game</h3>
+    <p>RCC-based bus simulation, size and performance optimization.</p>
+    <a class="text-link" href="https://play.google.com/store/apps/details?id=com.incignite.bussimulator.busgames.busdrivinggames" target="_blank" rel="noopener noreferrer">View project <i class="fa-solid fa-arrow-right"></i></a>
+  </div>
+</article>
+<article class="featured-card reveal">
+  <a class="project-visual" href="https://play.google.com/store/apps/details?id=com.frs.forest.gorilla.simulator" target="_blank" rel="noopener noreferrer" aria-label="Open Wild Forest Gorilla Games on Google Play">
+    <img src="imgs/gorilla.webp" alt="Wild Forest Gorilla Games game artwork" loading="lazy">
+    <span class="visual-chip">Google Play <i class="fa-solid fa-arrow-up-right-from-square"></i></span>
+  </a>
+  <div class="featured-body">
+    <p class="eyebrow">Featured project</p>
+    <h3>Wild Forest Gorilla Games</h3>
+    <p>Player and camera controller work plus AdMob and consent updates.</p>
+    <a class="text-link" href="https://play.google.com/store/apps/details?id=com.frs.forest.gorilla.simulator" target="_blank" rel="noopener noreferrer">View project <i class="fa-solid fa-arrow-right"></i></a>
+  </div>
+</article>
+<article class="featured-card reveal">
+  <a class="project-visual" href="https://play.google.com/store/apps/details?id=com.frs.anaconda.angrySnake.Simulator" target="_blank" rel="noopener noreferrer" aria-label="Open Snake Simulator: Snake Games on Google Play">
+    <img src="imgs/s.webp" alt="Snake Simulator: Snake Games game artwork" loading="lazy">
+    <span class="visual-chip">Google Play <i class="fa-solid fa-arrow-up-right-from-square"></i></span>
+  </a>
+  <div class="featured-body">
+    <p class="eyebrow">Featured project</p>
+    <h3>Snake Simulator: Snake Games</h3>
+    <p>Player and camera controller setup with Google Ads mediation.</p>
+    <a class="text-link" href="https://play.google.com/store/apps/details?id=com.frs.anaconda.angrySnake.Simulator" target="_blank" rel="noopener noreferrer">View project <i class="fa-solid fa-arrow-right"></i></a>
+  </div>
+</article>
+<article class="featured-card reveal">
+  <a class="project-visual" href="https://play.google.com/store/apps/details?id=com.frs.kittenCat.petSimulator.games" target="_blank" rel="noopener noreferrer" aria-label="Open Pet Cat Simulator Kitty Games on Google Play">
+    <img src="imgs/aaa.webp" alt="Pet Cat Simulator Kitty Games game artwork" loading="lazy">
+    <span class="visual-chip">Google Play <i class="fa-solid fa-arrow-up-right-from-square"></i></span>
+  </a>
+  <div class="featured-body">
+    <p class="eyebrow">Featured project</p>
+    <h3>Pet Cat Simulator Kitty Games</h3>
+    <p>Featured mobile animal-simulation title from the existing portfolio.</p>
+    <a class="text-link" href="https://play.google.com/store/apps/details?id=com.frs.kittenCat.petSimulator.games" target="_blank" rel="noopener noreferrer">View project <i class="fa-solid fa-arrow-right"></i></a>
+  </div>
+</article></div>
 
-    function onScroll() {
-        let activeSectionFound = false;
+        <div class="projects-toolbar reveal"><div><p class="section-kicker" style="margin-bottom:6px">Project archive</p><strong>All portfolio projects</strong></div><div class="search-wrap"><i class="fa-solid fa-magnifying-glass"></i><input id="projectSearch" type="search" placeholder="Search projects..." aria-label="Search projects"></div><span class="project-count" id="projectCount">18 projects</span></div>
+        <div class="all-projects" id="projectGrid"><article class="mini-project reveal" data-project>
+  <div class="mini-top"><span>01</span><a href="https://play.google.com/store/apps/details?id=com.taycoongames.bullfighter.offline.game&amp;hl=en&amp;gl=US" target="_blank" rel="noopener noreferrer" aria-label="Open Bull Fighting Game: Bull Games"><i class="fa-solid fa-arrow-up-right-from-square"></i></a></div>
+  <h3>Bull Fighting Game: Bull Games</h3>
+  <p>Worked on controller, game flow, and size and performance optimization on this simulation game.</p>
+</article>
+<article class="mini-project reveal" data-project>
+  <div class="mini-top"><span>02</span><a href="https://play.google.com/store/apps/details?id=com.incignite.bussimulator.busgames.busdrivinggames" target="_blank" rel="noopener noreferrer" aria-label="Open Public Bus: Transport Game 2023"><i class="fa-solid fa-arrow-up-right-from-square"></i></a></div>
+  <h3>Public Bus: Transport Game 2023</h3>
+  <p>Worked on RCC controller to make a Bus simulation game, including size and performance optimization.</p>
+</article>
+<article class="mini-project reveal" data-project>
+  <div class="mini-top"><span>03</span><a href="https://play.google.com/store/apps/details?id=com.funrealms.carparking.games.parking.car.game" target="_blank" rel="noopener noreferrer" aria-label="Open Car Parking 3D: Car Games 2023"><i class="fa-solid fa-arrow-up-right-from-square"></i></a></div>
+  <h3>Car Parking 3D: Car Games 2023</h3>
+  <p>Worked on RCC controller, level designing, and UI implementation.</p>
+</article>
+<article class="mini-project reveal" data-project>
+  <div class="mini-top"><span>04</span><a href="https://play.google.com/store/apps/details?id=com.funrealms.monster.truck.simulator.game" target="_blank" rel="noopener noreferrer" aria-label="Open Monster Truck Games — 3D Stunt"><i class="fa-solid fa-arrow-up-right-from-square"></i></a></div>
+  <h3>Monster Truck Games — 3D Stunt</h3>
+  <p>Worked on RCC controller, level designing, and UI implementation.</p>
+</article>
+<article class="mini-project reveal" data-project>
+  <div class="mini-top"><span>05</span><a href="https://play.google.com/store/apps/details?id=com.action.game.best.sniper.gun.shooting.games.pure.sniper3d" target="_blank" rel="noopener noreferrer" aria-label="Open Sniper 3D・Gun Shooting Games"><i class="fa-solid fa-arrow-up-right-from-square"></i></a></div>
+  <h3>Sniper 3D・Gun Shooting Games</h3>
+  <p>Worked on controller and weapons system.</p>
+</article>
+<article class="mini-project reveal" data-project>
+  <div class="mini-top"><span>06</span><a href="https://play.google.com/store/apps/details?id=com.frs.dog.petsimulator.games" target="_blank" rel="noopener noreferrer" aria-label="Open Wild Dog Pet Simulator Games"><i class="fa-solid fa-arrow-up-right-from-square"></i></a></div>
+  <h3>Wild Dog Pet Simulator Games</h3>
+  <p>Worked on Wild Dog Pet Simulator Game. Its an animal simulator. I gave updates for this project.</p>
+</article>
+<article class="mini-project reveal" data-project>
+  <div class="mini-top"><span>07</span><a href="https://play.google.com/store/apps/details?id=com.frs.forest.gorilla.simulator" target="_blank" rel="noopener noreferrer" aria-label="Open Wild Forest Gorilla Game"><i class="fa-solid fa-arrow-up-right-from-square"></i></a></div>
+  <h3>Wild Forest Gorilla Game</h3>
+  <p>Its an animal simulation game. In this project I worked on player controller and camera controller. I
+                    also updated the google admob ads and applied consent form.</p>
+</article>
+<article class="mini-project reveal" data-project>
+  <div class="mini-top"><span>08</span><a href="https://play.google.com/store/apps/details?id=com.frs.anaconda.angrySnake.Simulator" target="_blank" rel="noopener noreferrer" aria-label="Open Snake simulator: Snake Games"><i class="fa-solid fa-arrow-up-right-from-square"></i></a></div>
+  <h3>Snake simulator: Snake Games</h3>
+  <p>Animal simulation game. In this project i setup player controller, camera controller and setup google ads mediation.</p>
+</article>
+<article class="mini-project reveal" data-project>
+  <div class="mini-top"><span>09</span><a href="https://play.google.com/store/apps/details?id=com.frs.wildcrocodile.attack.simulator2019" target="_blank" rel="noopener noreferrer" aria-label="Open Crocodile Games Animal Sim 3D"><i class="fa-solid fa-arrow-up-right-from-square"></i></a></div>
+  <h3>Crocodile Games Animal Sim 3D</h3>
+  <p>Its an animal simulation game. In this project I worked on player controller and camera controller. I
+                    also updated the google admob ads and applied consent form.</p>
+</article>
+<article class="mini-project reveal" data-project>
+  <div class="mini-top"><span>10</span><a href="https://play.google.com/store/apps/details?id=com.frs.bullattack.fighting.bullgames" target="_blank" rel="noopener noreferrer" aria-label="Open Wild Battle Craft Bull Games"><i class="fa-solid fa-arrow-up-right-from-square"></i></a></div>
+  <h3>Wild Battle Craft Bull Games</h3>
+  <p>Its an animal simulation game. In this project I worked on player controller and camera controller. I
+                    also updated the google admob ads and applied consent form.</p>
+</article>
+<article class="mini-project reveal" data-project>
+  <div class="mini-top"><span>11</span><a href="https://play.google.com/store/apps/details?id=com.frs.furydragon.attack.simulator" target="_blank" rel="noopener noreferrer" aria-label="Open Flying Dragon Simulator Games"><i class="fa-solid fa-arrow-up-right-from-square"></i></a></div>
+  <h3>Flying Dragon Simulator Games</h3>
+  <p>Its an animal simulation game. In this project i applied google mobile ads mediation.</p>
+</article>
+<article class="mini-project reveal" data-project>
+  <div class="mini-top"><span>12</span><a href="https://play.google.com/store/apps/details?id=com.frs.anaconda.snakeattack.simulator" target="_blank" rel="noopener noreferrer" aria-label="Open Angry Anaconda Simulator Games"><i class="fa-solid fa-arrow-up-right-from-square"></i></a></div>
+  <h3>Angry Anaconda Simulator Games</h3>
+  <p>Its an animal simulation game. In this project I worked on player controller and camera controller. I
+                    also updated the google admob ads and applied consent form.</p>
+</article>
+<article class="mini-project reveal" data-project>
+  <div class="mini-top"><span>13</span><a href="https://play.google.com/store/apps/details?id=com.frs.wildwolf.animal.simulator" target="_blank" rel="noopener noreferrer" aria-label="Open Wolf Simulator Animal Games"><i class="fa-solid fa-arrow-up-right-from-square"></i></a></div>
+  <h3>Wolf Simulator Animal Games</h3>
+  <p>Its an animal simulation game. I gave updates for this project.</p>
+</article>
+<article class="mini-project reveal" data-project>
+  <div class="mini-top"><span>14</span><a href="https://play.google.com/store/apps/details?id=com.frs.wildanimal.cheetah.simulator" target="_blank" rel="noopener noreferrer" aria-label="Open Wild Cheetah Offline Sim Game"><i class="fa-solid fa-arrow-up-right-from-square"></i></a></div>
+  <h3>Wild Cheetah Offline Sim Game</h3>
+  <p>Its an animal simulation game. In this project I worked on player controller and camera controller. I
+                    also updated the google admob ads and applied consent form.</p>
+</article>
+<article class="mini-project reveal" data-project>
+  <div class="mini-top"><span>15</span><a href="https://play.google.com/store/apps/details?id=com.frs.antsimulator.insect.games" target="_blank" rel="noopener noreferrer" aria-label="Open Ants Army Simulator: Ant Games"><i class="fa-solid fa-arrow-up-right-from-square"></i></a></div>
+  <h3>Ants Army Simulator: Ant Games</h3>
+  <p>Animal simulation game. In this project I worked on player controller and camera controller. I
+                    also updated the google admob ads and applied consent form.</p>
+</article>
+<article class="mini-project reveal" data-project>
+  <div class="mini-top"><span>16</span><a href="https://play.google.com/store/apps/details?id=com.frs.werewolf.survival.hunting" target="_blank" rel="noopener noreferrer" aria-label="Open Forest Wild Werewolf Huntings"><i class="fa-solid fa-arrow-up-right-from-square"></i></a></div>
+  <h3>Forest Wild Werewolf Huntings</h3>
+  <p>Animal simulation game. I worked on this project from start to finish from scrach.</p>
+</article>
+<article class="mini-project reveal" data-project>
+  <div class="mini-top"><span>17</span><a href="https://play.google.com/store/apps/details?id=com.frs.mouse.simulator.ratlife" target="_blank" rel="noopener noreferrer" aria-label="Open Mouse Animal Life Simulator"><i class="fa-solid fa-arrow-up-right-from-square"></i></a></div>
+  <h3>Mouse Animal Life Simulator</h3>
+  <p>Its an animal simulation game. I gave updates for this project.</p>
+</article>
+<article class="mini-project reveal" data-project>
+  <div class="mini-top"><span>18</span><a href="https://play.google.com/store/apps/details?id=com.frs.scorpion.familysimulator.game" target="_blank" rel="noopener noreferrer" aria-label="Open Wild Scorpion Life Simulator"><i class="fa-solid fa-arrow-up-right-from-square"></i></a></div>
+  <h3>Wild Scorpion Life Simulator</h3>
+  <p>Its an animal simulation game. I updated the google admob ads and applied consent form In this game i made the enemie AI system.</p>
+</article></div>
+      </div>
+    </section>
 
-        sections.forEach(section => {
-            if (isElementInViewport(section) && !activeSectionFound) {
-                section.classList.add('active');
-                activeSectionFound = true;
-            } else {
-                section.classList.remove('active');
-            }
-        });
-    }
+    <section class="section" id="education">
+      <div class="container"><p class="section-kicker reveal">05 / Education</p><h2 class="section-title reveal">Academic foundation.</h2>
+        <div class="education-card reveal"><div class="edu-side"><h3>BS Computer Science</h3><p>Computer-science education supporting a practical career in Unity game development.</p></div><div class="edu-list">
+          <div class="edu-row"><strong>Graduation</strong><span>UET Taxila — BS Computer Science</span></div>
+          <div class="edu-row"><strong>FSC Pre-Engineering</strong><span>Manjan Bazam Cadet College, Ghazi Campus, Tarbela Cantt.</span></div>
+          <div class="edu-row"><strong>Matriculation</strong><span>FG Boys High School No. 1, Tariqabad, Rawalpindi</span></div>
+        </div></div>
+      </div>
+    </section>
 
-    window.addEventListener('scroll', onScroll);
-    window.addEventListener('resize', onScroll);
+    <section class="section" id="contact">
+      <div class="container"><div class="contact-panel reveal"><p class="section-kicker">06 / Contact</p><h2>Have a game idea? Let’s build something playable.</h2><p>Reach out for collaboration, Unity game-development work, project updates or new game ideas.</p>
+        <div class="contact-links"><a class="contact-link" href="mailto:umairniazi5556@gmail.com"><i class="fa-regular fa-envelope"></i>umairniazi5556@gmail.com</a><a class="contact-link" href="tel:+923161755475"><i class="fa-solid fa-phone"></i>+92 316 1755475</a><a class="contact-link" href="tel:+923068885475"><i class="fa-solid fa-phone"></i>+92 306 8885475</a><span class="contact-link"><i class="fa-solid fa-location-dot"></i>Rawalpindi, Pakistan</span></div>
+      </div></div>
+    </section>
+  </main>
 
-    // Initial check in case any sections are in view on page load
-    onScroll();
-});
+  <footer><div class="container footer-row"><span>© <span id="year"></span> Muhammad Umair. Unity Game Developer.</span><a class="back-top" href="#home">Back to top <i class="fa-solid fa-arrow-up"></i></a></div></footer>
 
-
-        document.addEventListener("DOMContentLoaded", function () {
-            const typingText = document.getElementById('typing-text');
-            typingText.style.width = typingText.scrollWidth + 'px'; // Set the width to the scroll width
-        });
-
-
-
-        let currentImageIndex = 0;
-const images = ["imgs/pic.webp", "imgs/IMG-20211116-WA0002.webp"];
-const imageElement = document.getElementById("profile-image");
-
-setInterval(() => {
-    currentImageIndex = (currentImageIndex + 1) % images.length;
-    imageElement.style.opacity = 0; // Start fading out
-    setTimeout(() => {
-        imageElement.src = images[currentImageIndex];
-        imageElement.style.opacity = 1; // Start fading in
-    }, 1000); // Time should match the fade-out duration
-}, 3000);
-
-    </script>
+  <script>
+    const loader=document.getElementById('loader');
+    window.addEventListener('load',()=>setTimeout(()=>loader.classList.add('hide'),280));
+    const header=document.querySelector('.site-header');
+    window.addEventListener('scroll',()=>header.classList.toggle('scrolled',window.scrollY>20),{passive:true});
+    const menuBtn=document.getElementById('menuBtn'),navLinks=document.getElementById('navLinks');
+    menuBtn.addEventListener('click',()=>{navLinks.classList.toggle('open');menuBtn.innerHTML=navLinks.classList.contains('open')?'<i class="fa-solid fa-xmark"></i>':'<i class="fa-solid fa-bars"></i>';});
+    navLinks.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>navLinks.classList.remove('open')));
+    const observer=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('visible');observer.unobserve(entry.target)}}),{threshold:.12});
+    document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+    const search=document.getElementById('projectSearch'),cards=[...document.querySelectorAll('[data-project]')],count=document.getElementById('projectCount');
+    search.addEventListener('input',()=>{const q=search.value.toLowerCase().trim();let visible=0;cards.forEach(card=>{const show=card.innerText.toLowerCase().includes(q);card.classList.toggle('hidden',!show);if(show)visible++;});count.textContent=`${visible} project${visible===1?'':'s'}`;});
+    document.getElementById('year').textContent=new Date().getFullYear();
+  </script>
 </body>
-
 </html>
