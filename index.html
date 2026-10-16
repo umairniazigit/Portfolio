@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+<script>document.documentElement.classList.add('js')</script>
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,431 +9,500 @@
   <meta name="author" content="Muhammad Umair">
   <meta property="og:title" content="Muhammad Umair — Unity Game Developer">
   <meta property="og:description" content="35+ published mobile games · 13M+ combined installs · Unity, C#, gameplay systems, optimization and monetization.">
-  <meta property="og:image" content="imgs/IMG-20211116-WA0002.webp">
-  <meta name="theme-color" content="#fafaf8">
+  <meta property="og:image" content="imgs/shots/com.taycoongames.bullfighter.offline.game.jpg">
+  <meta name="theme-color" content="#f7f7f5">
   <link rel="icon" type="image/png" href="imgs/strategy.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,500;8..60,600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     :root{
-      --bg:#fafaf8; --surface:#ffffff; --ink:#15181d; --body:#3a414b; --muted:#6b7380;
-      --line:#e5e5e0; --line-strong:#d4d4cd; --accent:#1d4e89; --accent-soft:#eaf0f8;
-      --ok:#1f7a4d; --max:1080px; --label:200px;
+      --bg:#f7f7f5; --surface:#ffffff; --surface-2:#f0f0ec; --ink:#0f1115; --body:#454b55; --muted:#7a808a;
+      --line:#e6e6e1; --accent:#2f54eb; --accent-ink:#ffffff; --accent-soft:#eef2ff; --ok:#17a34a;
+      --shadow:0 1px 2px rgba(16,18,24,.04),0 8px 24px rgba(16,18,24,.06);
+      --shadow-lg:0 2px 4px rgba(16,18,24,.04),0 24px 48px rgba(16,18,24,.10);
+      --max:1180px; --r:16px;
     }
     @media (prefers-color-scheme:dark){
       :root:not([data-theme="light"]){
-        --bg:#111317; --surface:#171a1f; --ink:#eef0f3; --body:#c3c8d0; --muted:#8c94a0;
-        --line:#262a31; --line-strong:#333842; --accent:#8db4e8; --accent-soft:#1b2533; --ok:#6cc79a;
+        --bg:#0d0f13; --surface:#15181e; --surface-2:#1b1f26; --ink:#f2f4f7; --body:#b9c0cb; --muted:#828a96;
+        --line:#252a33; --accent:#6d8bff; --accent-ink:#0d0f13; --accent-soft:#1a2140; --ok:#4ade80;
+        --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 24px rgba(0,0,0,.25); --shadow-lg:0 24px 48px rgba(0,0,0,.45);
       }
     }
     :root[data-theme="dark"]{
-      --bg:#111317; --surface:#171a1f; --ink:#eef0f3; --body:#c3c8d0; --muted:#8c94a0;
-      --line:#262a31; --line-strong:#333842; --accent:#8db4e8; --accent-soft:#1b2533; --ok:#6cc79a;
+      --bg:#0d0f13; --surface:#15181e; --surface-2:#1b1f26; --ink:#f2f4f7; --body:#b9c0cb; --muted:#828a96;
+      --line:#252a33; --accent:#6d8bff; --accent-ink:#0d0f13; --accent-soft:#1a2140; --ok:#4ade80;
+      --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 24px rgba(0,0,0,.25); --shadow-lg:0 24px 48px rgba(0,0,0,.45);
     }
     *{box-sizing:border-box}
-    html{scroll-behavior:smooth;scroll-padding-top:80px;-webkit-text-size-adjust:100%}
-    body{margin:0;background:var(--bg);color:var(--body);font:16px/1.65 Inter,system-ui,-apple-system,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased}
-    a{color:inherit}
+    html{scroll-behavior:smooth;scroll-padding-top:84px;-webkit-text-size-adjust:100%}
+    body{margin:0;background:var(--bg);color:var(--body);font:16px/1.65 "Plus Jakarta Sans",system-ui,-apple-system,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+    a{color:inherit;text-decoration:none}
     img{display:block;max-width:100%}
-    h1,h2,h3{color:var(--ink);margin:0}
+    h1,h2,h3,h4{color:var(--ink);margin:0;letter-spacing:-.02em}
+    p{margin:0}
     .wrap{width:min(100% - 32px,var(--max));margin-inline:auto}
-    .serif{font-family:"Source Serif 4",Georgia,serif}
-    :focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:4px}
+    :focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:6px}
+    .ic{width:18px;height:18px;flex:none}
 
-    /* Header */
-    .top{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:saturate(1.4) blur(12px);border-bottom:1px solid var(--line)}
-    .top .wrap{display:flex;align-items:center;justify-content:space-between;height:64px;gap:20px}
-    .logo{font-weight:600;color:var(--ink);text-decoration:none;letter-spacing:-.01em}
-    .logo span{color:var(--muted);font-weight:500}
-    nav{display:flex;align-items:center;gap:24px}
-    nav a{text-decoration:none;font-size:.9rem;color:var(--muted);transition:color .15s}
-    nav a:hover{color:var(--ink)}
-    .btn{display:inline-flex;align-items:center;gap:8px;padding:9px 16px;border-radius:8px;font-size:.9rem;font-weight:600;text-decoration:none;border:1px solid var(--line-strong);color:var(--ink);background:var(--surface);transition:border-color .15s,background .15s}
-    .btn:hover{border-color:var(--ink)}
-    .btn.primary{background:var(--ink);color:var(--bg);border-color:var(--ink)}
-    .btn.primary:hover{opacity:.88}
-    nav .btn{color:var(--ink)}
-    .menu{display:none;background:none;border:1px solid var(--line-strong);border-radius:8px;width:40px;height:40px;color:var(--ink);cursor:pointer}
-    .icon{width:16px;height:16px;flex:none}
+    /* ---------- Header ---------- */
+    .top{position:fixed;inset:0 0 auto;z-index:30;transition:background .25s,border-color .25s,box-shadow .25s;border-bottom:1px solid transparent}
+    .top.scrolled{background:color-mix(in srgb,var(--bg) 85%,transparent);backdrop-filter:saturate(1.5) blur(14px);border-color:var(--line)}
+    .top .wrap{display:flex;align-items:center;justify-content:space-between;height:72px;gap:24px}
+    .logo{display:flex;align-items:center;gap:10px;font-weight:700;color:var(--ink)}
+    .mark{width:36px;height:36px;border-radius:10px;display:grid;place-items:center;background:var(--ink);color:var(--bg);font-weight:800;font-size:.85rem;letter-spacing:.02em}
+    nav{display:flex;align-items:center;gap:6px}
+    nav a{padding:8px 12px;border-radius:8px;font-size:.9rem;font-weight:500;color:var(--body);transition:color .15s,background .15s}
+    nav a:hover{color:var(--ink);background:var(--surface-2)}
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 20px;border-radius:12px;font-weight:600;font-size:.93rem;border:1px solid var(--line);background:var(--surface);color:var(--ink);transition:transform .15s,box-shadow .15s,background .15s;white-space:nowrap}
+    .btn:hover{transform:translateY(-1px);box-shadow:var(--shadow)}
+    .btn.primary{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+    nav .btn{padding:9px 14px;margin-left:8px;font-size:.88rem}
+    nav .btn:hover{background:var(--surface)}
+    .menu{display:none;width:42px;height:42px;border-radius:10px;border:1px solid var(--line);background:var(--surface);color:var(--ink);cursor:pointer;place-items:center}
 
-    /* Hero */
-    .hero{padding:88px 0 72px;border-bottom:1px solid var(--line)}
-    .hero-grid{display:grid;grid-template-columns:1fr auto;gap:56px;align-items:start}
-    .kicker{display:inline-flex;align-items:center;gap:8px;font-size:.85rem;color:var(--muted);margin-bottom:22px}
-    .dot{width:8px;height:8px;border-radius:50%;background:var(--ok)}
-    .hero h1{font-family:"Source Serif 4",Georgia,serif;font-weight:600;font-size:clamp(2.6rem,6vw,4.25rem);line-height:1.04;letter-spacing:-.025em}
-    .hero h1 em{font-style:normal;color:var(--muted)}
-    .lead{font-size:1.15rem;max-width:640px;margin:22px 0 32px;color:var(--body)}
-    .actions{display:flex;flex-wrap:wrap;gap:12px}
-    .portrait{width:200px;aspect-ratio:4/5;object-fit:cover;border-radius:12px;border:1px solid var(--line);filter:grayscale(.15)}
-    .facts{display:grid;grid-template-columns:repeat(4,1fr);margin-top:64px;border-top:1px solid var(--line)}
-    .fact{padding:22px 20px 0 0}
-    .fact+.fact{padding-left:20px;border-left:1px solid var(--line)}
-    .fact b{display:block;font-family:"Source Serif 4",Georgia,serif;font-weight:600;font-size:2rem;color:var(--ink);line-height:1.1;font-variant-numeric:tabular-nums}
-    .fact span{font-size:.85rem;color:var(--muted)}
+    /* ---------- Hero ---------- */
+    .hero{position:relative;padding:150px 0 56px;overflow:hidden}
+    .hero::before{content:"";position:absolute;inset:0;z-index:-1;background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:56px 56px;mask-image:radial-gradient(ellipse 70% 60% at 50% 0%,#000 30%,transparent 75%);-webkit-mask-image:radial-gradient(ellipse 70% 60% at 50% 0%,#000 30%,transparent 75%);opacity:.7}
+    .hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:56px;align-items:center}
+    .pill{display:inline-flex;align-items:center;gap:10px;padding:6px 14px 6px 6px;border:1px solid var(--line);background:var(--surface);border-radius:99px;font-size:.85rem;font-weight:500;color:var(--body);box-shadow:var(--shadow)}
+    .pill img{width:28px;height:28px;border-radius:50%;object-fit:cover}
+    .pill .live{width:8px;height:8px;border-radius:50%;background:var(--ok);box-shadow:0 0 0 4px color-mix(in srgb,var(--ok) 20%,transparent)}
+    .hero h1{font-size:clamp(2.6rem,6.2vw,4.6rem);line-height:1.02;font-weight:800;letter-spacing:-.045em;margin:26px 0 22px}
+    .hero h1 .hl{color:var(--accent)}
+    .lead{font-size:clamp(1.02rem,1.5vw,1.18rem);max-width:560px;line-height:1.7}
+    .actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:34px}
+    .mosaic{position:relative;display:grid;grid-template-columns:repeat(4,1fr);gap:14px;transform:rotate(-6deg) translateX(10px)}
+    .mosaic img{width:100%;aspect-ratio:1;border-radius:22%;box-shadow:var(--shadow-lg);background:var(--surface);transition:transform .3s}
+    .mosaic img:nth-child(4n+2),.mosaic img:nth-child(4n+4){transform:translateY(26px)}
+    .mosaic img:hover{transform:scale(1.06) translateY(-4px)}
 
-    /* Sections */
-    section.block{padding:72px 0;border-bottom:1px solid var(--line)}
-    .row{display:grid;grid-template-columns:var(--label) 1fr;gap:40px}
-    .label{font-size:.8rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);padding-top:6px}
-    .label .n{color:var(--accent);margin-right:8px;font-variant-numeric:tabular-nums}
-    .stick{position:sticky;top:96px}
-    h2{font-family:"Source Serif 4",Georgia,serif;font-weight:600;font-size:clamp(1.6rem,3vw,2.1rem);line-height:1.2;letter-spacing:-.015em;margin-bottom:18px}
-    p{margin:0 0 14px}
-    .muted{color:var(--muted)}
+    .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:72px;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow)}
+    .stat{padding:24px 28px}
+    .stat+.stat{border-left:1px solid var(--line)}
+    .stat b{display:block;font-size:clamp(1.7rem,3vw,2.3rem);font-weight:800;color:var(--ink);letter-spacing:-.04em;line-height:1.1;font-variant-numeric:tabular-nums}
+    .stat span{font-size:.88rem;color:var(--muted)}
 
-    .details{display:grid;grid-template-columns:repeat(2,1fr);gap:0 32px;margin-top:28px;border-top:1px solid var(--line)}
-    .details div{display:flex;justify-content:space-between;gap:16px;padding:12px 0;border-bottom:1px solid var(--line);font-size:.92rem}
-    .details dt{color:var(--muted)}
-    .details dd{margin:0;color:var(--ink);font-weight:500;text-align:right}
+    /* ---------- Screenshot strip ---------- */
+    .strip{margin:8px 0 0;overflow:hidden;mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+    .track{display:flex;gap:16px;width:max-content;animation:scroll 70s linear infinite;padding:24px 0}
+    .strip:hover .track{animation-play-state:paused}
+    .track img{height:150px;width:auto;aspect-ratio:16/9;object-fit:cover;border-radius:12px;box-shadow:var(--shadow)}
+    @keyframes scroll{to{transform:translateX(calc(-50% - 8px))}}
+
+    /* ---------- Sections ---------- */
+    section.sec{padding:110px 0}
+    .head{display:flex;align-items:end;justify-content:space-between;gap:24px;margin-bottom:48px;flex-wrap:wrap}
+    .eyebrow{display:inline-block;font-size:.8rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-bottom:14px}
+    h2{font-size:clamp(2rem,4vw,3rem);font-weight:800;line-height:1.08;letter-spacing:-.035em;max-width:720px}
+    .sub{max-width:520px;color:var(--muted)}
+
+    /* About */
+    .about{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start}
+    .about-text p{font-size:1.06rem;line-height:1.8;margin-bottom:18px}
+    .about-text p:first-child{font-size:1.3rem;line-height:1.55;color:var(--ink);font-weight:600;letter-spacing:-.01em}
+    .info{margin-top:28px;display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    .info div{padding:14px 16px;border:1px solid var(--line);border-radius:12px;background:var(--surface)}
+    .info small{display:block;font-size:.75rem;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.08em}
+    .info span{color:var(--ink);font-weight:600;font-size:.93rem}
+    .caps{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+    .cap{padding:24px;border:1px solid var(--line);border-radius:var(--r);background:var(--surface);transition:box-shadow .2s,transform .2s}
+    .cap:hover{box-shadow:var(--shadow-lg);transform:translateY(-2px)}
+    .cap .ico{width:44px;height:44px;border-radius:12px;display:grid;place-items:center;background:var(--accent-soft);color:var(--accent);margin-bottom:18px}
+    .cap h3{font-size:1.02rem;font-weight:700;margin-bottom:6px}
+    .cap p{font-size:.9rem;color:var(--muted);line-height:1.6}
+    .tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:28px}
+    .tag{padding:7px 12px;border-radius:8px;background:var(--surface-2);font-size:.84rem;font-weight:600;color:var(--ink)}
 
     /* Experience */
-    .jobs{list-style:none;margin:0;padding:0}
-    .job{display:grid;grid-template-columns:1fr auto;gap:4px 24px;padding:22px 0;border-bottom:1px solid var(--line)}
-    .job:first-child{padding-top:0}
-    .job:last-child{border-bottom:0}
-    .job h3{font-size:1.05rem;font-weight:600}
-    .job .when{font-size:.88rem;color:var(--muted);font-variant-numeric:tabular-nums;white-space:nowrap}
-    .job .role{grid-column:1/-1;font-size:.92rem;color:var(--accent);font-weight:500}
-    .job p{grid-column:1/-1;margin:6px 0 0;font-size:.95rem}
-    .now{display:inline-block;margin-left:8px;padding:1px 8px;border-radius:99px;font-size:.72rem;font-weight:600;color:var(--ok);border:1px solid currentColor;vertical-align:2px}
+    .exp{display:grid;gap:14px}
+    .job{display:grid;grid-template-columns:210px 1fr auto;gap:28px;align-items:start;padding:28px 30px;border:1px solid var(--line);border-radius:var(--r);background:var(--surface);transition:box-shadow .2s}
+    .job:hover{box-shadow:var(--shadow)}
+    .job .when{font-size:.9rem;font-weight:600;color:var(--muted);padding-top:2px;font-variant-numeric:tabular-nums}
+    .job h3{font-size:1.15rem;font-weight:700}
+    .job .role{display:block;font-size:.9rem;color:var(--accent);font-weight:600;margin:2px 0 10px}
+    .job p{font-size:.95rem;line-height:1.7;max-width:640px}
+    .badge{display:inline-flex;align-items:center;gap:6px;padding:4px 10px;border-radius:99px;font-size:.76rem;font-weight:700;background:color-mix(in srgb,var(--ok) 12%,transparent);color:var(--ok);white-space:nowrap}
+    .badge::before{content:"";width:6px;height:6px;border-radius:50%;background:currentColor}
 
-    /* Featured */
-    .featured{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:8px}
-    .feat{display:flex;flex-direction:column;padding:22px;background:var(--surface);border:1px solid var(--line);border-radius:12px;text-decoration:none;transition:border-color .15s,transform .15s}
-    .feat:hover{border-color:var(--line-strong);transform:translateY(-2px)}
-    .feat img{width:56px;height:56px;border-radius:12px;border:1px solid var(--line)}
-    .feat h3{font-size:1rem;font-weight:600;margin:16px 0 6px;line-height:1.35}
-    .feat p{font-size:.88rem;color:var(--muted);margin:0 0 16px;flex:1}
-    .feat .meta{display:flex;justify-content:space-between;font-size:.8rem;color:var(--muted);border-top:1px solid var(--line);padding-top:12px}
-    .feat .meta b{color:var(--ink);font-weight:600}
-
-    /* Games list */
-    .toolbar{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;margin:40px 0 8px}
-    .chips{display:flex;flex-wrap:wrap;gap:6px}
-    .chip{padding:6px 12px;border-radius:99px;border:1px solid var(--line-strong);background:transparent;color:var(--body);font:500 .82rem Inter,sans-serif;cursor:pointer}
-    .chip[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--bg)}
+    /* Games */
+    .work-bg{background:var(--surface);border-block:1px solid var(--line)}
+    .filters{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:14px;margin-bottom:32px}
+    .tabs{display:flex;flex-wrap:wrap;gap:6px;padding:5px;background:var(--surface-2);border-radius:12px}
+    .tab{border:0;background:transparent;padding:8px 14px;border-radius:8px;font:600 .86rem "Plus Jakarta Sans",sans-serif;color:var(--body);cursor:pointer;transition:background .15s,color .15s}
+    .tab[aria-selected="true"]{background:var(--surface);color:var(--ink);box-shadow:var(--shadow)}
+    .tab .c{color:var(--muted);font-weight:500;margin-left:4px}
     .search{position:relative}
-    .search input{width:220px;padding:8px 12px 8px 34px;border:1px solid var(--line-strong);border-radius:8px;background:var(--surface);color:var(--ink);font:inherit;font-size:.88rem}
-    .search svg{position:absolute;left:11px;top:50%;transform:translateY(-50%);color:var(--muted)}
-    .group-title{display:flex;align-items:baseline;justify-content:space-between;gap:16px;margin:36px 0 4px;padding-bottom:10px;border-bottom:1px solid var(--ink)}
-    .group-title h3{font-size:1rem;font-weight:600}
-    .group-title span{font-size:.82rem;color:var(--muted)}
-    .games{list-style:none;margin:0;padding:0}
-    .game{display:grid;grid-template-columns:44px 1fr auto auto;align-items:center;gap:16px;padding:12px 0;border-bottom:1px solid var(--line)}
-    .game img,.game .ph{width:44px;height:44px;border-radius:10px;border:1px solid var(--line);object-fit:cover}
-    .ph{display:grid;place-items:center;background:var(--accent-soft);color:var(--accent);font-weight:600;font-size:.8rem}
-    .game .t{min-width:0}
-    .game .t b{display:block;color:var(--ink);font-weight:600;font-size:.95rem;line-height:1.35}
-    .game .t small{display:block;color:var(--muted);font-size:.82rem;line-height:1.45;margin-top:2px}
-    .game .dl{font-size:.85rem;color:var(--ink);font-weight:500;text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
-    .game .dl small{display:block;font-weight:400;color:var(--muted);font-size:.75rem}
-    .game a.go{display:inline-flex;align-items:center;gap:6px;font-size:.82rem;font-weight:600;color:var(--accent);text-decoration:none;padding:6px 10px;border:1px solid var(--line);border-radius:8px;white-space:nowrap}
-    .game a.go:hover{border-color:var(--accent)}
-    .game .off{font-size:.78rem;color:var(--muted);padding:6px 10px;white-space:nowrap}
-    .empty{padding:28px 0;color:var(--muted);display:none}
-
-    /* Skills */
-    .skills{display:grid;grid-template-columns:repeat(2,1fr);gap:28px 40px}
-    .skills h3{font-size:.95rem;font-weight:600;margin-bottom:8px}
-    .skills p{font-size:.93rem;margin:0}
+    .search input{width:260px;padding:11px 14px 11px 40px;border:1px solid var(--line);border-radius:12px;background:var(--bg);color:var(--ink);font:inherit;font-size:.9rem}
+    .search .ic{position:absolute;left:13px;top:50%;transform:translateY(-50%);color:var(--muted)}
+    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+    .card{display:flex;flex-direction:column;border:1px solid var(--line);border-radius:var(--r);background:var(--bg);overflow:hidden;transition:transform .25s,box-shadow .25s}
+    .card:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg)}
+    .shot{position:relative;aspect-ratio:16/9;overflow:hidden;background:var(--surface-2)}
+    .shot img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
+    .card:hover .shot img.fg{transform:scale(1.04)}
+    .shot.portrait img.bg{position:absolute;inset:0;filter:blur(18px) saturate(1.2);transform:scale(1.2);opacity:.85}
+    .shot.portrait img.fg{position:relative;object-fit:contain}
+    .shot .dl{position:absolute;top:12px;right:12px;padding:5px 10px;border-radius:8px;background:rgba(10,12,16,.72);backdrop-filter:blur(8px);color:#fff;font-size:.76rem;font-weight:700;display:flex;align-items:center;gap:6px}
+    .shot .hot{position:absolute;top:12px;left:12px;padding:5px 10px;border-radius:8px;background:var(--accent);color:var(--accent-ink);font-size:.72rem;font-weight:800;letter-spacing:.04em;text-transform:uppercase}
+    .body{position:relative;padding:38px 20px 20px;flex:1;display:flex;flex-direction:column}
+    .body .app{position:absolute;top:-28px;left:20px;width:56px;height:56px;border-radius:14px;border:3px solid var(--bg);box-shadow:var(--shadow);background:var(--surface)}
+    .body h3{font-size:1.05rem;font-weight:700;line-height:1.35}
+    .body .genre{font-size:.8rem;color:var(--muted);font-weight:600;margin:4px 0 10px}
+    .body p{font-size:.9rem;line-height:1.6;color:var(--body);flex:1}
+    .foot{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:18px;padding-top:14px;border-top:1px solid var(--line)}
+    .foot .pub{font-size:.76rem;color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+    .foot a{display:inline-flex;align-items:center;gap:6px;font-size:.84rem;font-weight:700;color:var(--accent);white-space:nowrap}
+    .foot a:hover{text-decoration:underline;text-underline-offset:3px}
+    .more{display:flex;justify-content:center;margin-top:36px}
+    .none{text-align:center;padding:48px 0;color:var(--muted);display:none}
+    .older{margin-top:48px;padding:22px 24px;border:1px dashed var(--line);border-radius:var(--r);display:flex;flex-wrap:wrap;gap:8px 24px;align-items:center;font-size:.9rem}
+    .older b{color:var(--ink)}
 
     /* Education */
-    .edu{list-style:none;margin:0;padding:0}
-    .edu li{display:grid;grid-template-columns:200px 1fr;gap:24px;padding:16px 0;border-bottom:1px solid var(--line)}
-    .edu li:first-child{padding-top:0}
-    .edu li:last-child{border-bottom:0}
-    .edu b{color:var(--ink);font-weight:600}
+    .edu{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+    .edu-card{padding:28px;border:1px solid var(--line);border-radius:var(--r);background:var(--surface)}
+    .edu-card .lvl{font-size:.78rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--accent)}
+    .edu-card h3{font-size:1.15rem;font-weight:700;margin:12px 0 6px}
+    .edu-card p{font-size:.92rem;color:var(--muted)}
 
     /* Contact */
-    .contact{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:24px}
-    .contact a,.contact div{display:flex;align-items:center;gap:12px;padding:16px 18px;border:1px solid var(--line);border-radius:10px;background:var(--surface);text-decoration:none;color:var(--ink);font-size:.93rem;min-width:0}
-    .contact a:hover{border-color:var(--line-strong)}
-    .contact svg{color:var(--accent)}
-    .contact small{display:block;color:var(--muted);font-size:.76rem}
-    .contact .v{overflow-wrap:anywhere}
+    .cta{position:relative;overflow:hidden;border-radius:28px;padding:72px 64px;background:#0f1115;color:#c9ced8}
+    .cta::before{content:"";position:absolute;inset:0;background:radial-gradient(600px 300px at 90% 0%,rgba(79,110,255,.45),transparent 70%),radial-gradient(500px 260px at 0% 100%,rgba(79,110,255,.18),transparent 70%)}
+    .cta>*{position:relative}
+    .cta h2{color:#fff;max-width:640px}
+    .cta .sub{color:#a3aab6;margin-top:14px;max-width:560px}
+    .links{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:40px;max-width:760px}
+    .links a,.links div{display:flex;align-items:center;gap:14px;padding:16px 18px;border-radius:14px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);color:#fff;font-weight:600;font-size:.95rem;min-width:0;transition:background .15s}
+    .links a:hover{background:rgba(255,255,255,.12)}
+    .links .ico{width:40px;height:40px;border-radius:10px;display:grid;place-items:center;background:rgba(255,255,255,.08);flex:none}
+    .links small{display:block;color:#8d95a3;font-weight:500;font-size:.76rem}
+    .links .v{overflow-wrap:anywhere}
 
-    footer{padding:32px 0 48px;font-size:.85rem;color:var(--muted)}
+    footer{padding:36px 0 48px;font-size:.88rem;color:var(--muted)}
     footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
-    footer a{text-decoration:none}
 
-    @media (max-width:900px){
-      .row{grid-template-columns:1fr;gap:16px}
-      .stick{position:static}
-      .featured{grid-template-columns:1fr 1fr}
-      .facts{grid-template-columns:1fr 1fr}
-      .fact:nth-child(3){padding-left:0;border-left:0}
-      .fact{padding-bottom:18px}
+    /* Reveal */
+    .js .rv{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s ease}
+    .js .rv.in{opacity:1;transform:none}
+
+    @media (max-width:1024px){
+      .grid{grid-template-columns:repeat(2,1fr)}
+      .hero-grid{grid-template-columns:1fr}
+      .mosaic{max-width:520px;transform:rotate(-4deg);margin:10px auto 20px}
+      .about{grid-template-columns:1fr;gap:40px}
+      .job{grid-template-columns:160px 1fr auto}
     }
-    @media (max-width:760px){
-      nav{display:none;position:absolute;top:64px;left:0;right:0;flex-direction:column;align-items:stretch;gap:0;padding:8px 16px 16px;background:var(--bg);border-bottom:1px solid var(--line)}
+    @media (max-width:860px){
+      nav{display:none;position:absolute;top:72px;left:16px;right:16px;flex-direction:column;align-items:stretch;padding:10px;background:var(--surface);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow-lg)}
       nav.open{display:flex}
-      nav a{padding:12px 0;border-bottom:1px solid var(--line);font-size:1rem}
-      nav .btn{margin-top:12px;justify-content:center;border-bottom:1px solid var(--line-strong)}
-      .menu{display:grid;place-items:center}
-      .hero{padding:48px 0 48px}
-      .hero-grid{grid-template-columns:1fr;gap:28px}
-      .portrait{width:112px;order:-1}
-      .facts{margin-top:44px}
-      .featured,.skills,.contact,.details{grid-template-columns:1fr}
-      .toolbar{flex-direction:column;align-items:stretch}
-      .search input{width:100%}
-      .game{grid-template-columns:44px 1fr auto;gap:12px}
-      .game .dl{display:none}
-      .edu li{grid-template-columns:1fr;gap:2px}
-      .job{grid-template-columns:1fr}
-      .game .go-t{display:none}
-      .game a.go{padding:10px}
-      .group-title{flex-direction:column;gap:2px}
-      .job .when{order:-1;font-size:.82rem}
-      section.block{padding:56px 0}
+      nav a{padding:12px 14px}
+      nav .btn{margin:6px 0 0}
+      .menu{display:grid}
+      .top{background:color-mix(in srgb,var(--bg) 90%,transparent);backdrop-filter:blur(14px)}
     }
-    @media (prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+    @media (max-width:680px){
+      .hero{padding:110px 0 32px}
+      .mosaic{gap:10px}
+      .stats{grid-template-columns:1fr 1fr;margin-top:48px}
+      .stat{padding:18px 20px}
+      .stat:nth-child(3){border-left:0}
+      .stat:nth-child(n+3){border-top:1px solid var(--line)}
+      .track img{height:110px}
+      section.sec{padding:72px 0}
+      .head{margin-bottom:32px}
+      .grid,.caps,.edu,.links,.info{grid-template-columns:1fr}
+      .job{grid-template-columns:1fr;gap:6px;padding:22px}
+      .job .badge{justify-self:start;order:-1}
+      .filters{flex-direction:column;align-items:stretch}
+      .tabs{overflow-x:auto;flex-wrap:nowrap;max-width:100%;scrollbar-width:none}
+      .filters>*{min-width:0}
+      .tab{white-space:nowrap}
+      .search input{width:100%}
+      .cta{padding:44px 22px;border-radius:22px}
+      .actions .btn{flex:1}
+    }
+    @media (prefers-reduced-motion:reduce){
+      html{scroll-behavior:auto}
+      .track{animation:none}
+      .js .rv{opacity:1;transform:none;transition:none}
+      *{transition:none!important}
+    }
     @media print{
-      .top,.toolbar,.actions,.game a.go,.menu{display:none!important}
-      body{background:#fff;color:#000;font-size:11pt}
-      section.block,.hero{padding:20px 0;break-inside:auto}
-      .feat,.game,.job{break-inside:avoid}
-      .stick{position:static}
+      .top,.strip,.filters,.mosaic,.more,.actions{display:none!important}
+      .hero{padding:0}
+      body{background:#fff}
+      .card,.job,.cap{break-inside:avoid;box-shadow:none}
+      .js .rv{opacity:1;transform:none}
+      .cta{background:#fff;color:#000;padding:0}
+      .cta h2,.links a,.links div{color:#000}
     }
   </style>
 </head>
 <body>
   <svg width="0" height="0" style="position:absolute" aria-hidden="true">
-    <symbol id="i-dl" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M12 3v12m0 0-5-5m5 5 5-5M4 21h16"/></symbol>
-    <symbol id="i-out" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></symbol>
-    <symbol id="i-mail" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M3 6h18v12H3zM3 7l9 6 9-6"/></symbol>
-    <symbol id="i-phone" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></symbol>
-    <symbol id="i-pin" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M12 21s-7-6.2-7-12a7 7 0 0 1 14 0c0 5.8-7 12-7 12zm0-9.5a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5"/></symbol>
-    <symbol id="i-gh" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.45-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.61.07-.61 1 .07 1.53 1.03 1.53 1.03.89 1.53 2.34 1.09 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.02a9.6 9.6 0 0 1 5 0c1.91-1.29 2.75-1.02 2.75-1.02.55 1.38.2 2.4.1 2.65.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.68-4.57 4.93.36.31.68.92.68 1.85v2.74c0 .27.18.58.69.48A10 10 0 0 0 12 2"/></symbol>
-    <symbol id="i-search" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M11 18a7 7 0 1 0 0-14 7 7 0 0 0 0 14zm9 2-4-4"/></symbol>
-    <symbol id="i-menu" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M4 7h16M4 12h16M4 17h16"/></symbol>
+    <defs>
+      <symbol id="i-dl" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M12 3v12m0 0-5-5m5 5 5-5M4 21h16"/></symbol>
+      <symbol id="i-arrow" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M7 17 17 7M8 7h9v9"/></symbol>
+      <symbol id="i-down" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M12 5v14m0 0-6-6m6 6 6-6"/></symbol>
+      <symbol id="i-mail" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M3 6h18v12H3zM3 7l9 6 9-6"/></symbol>
+      <symbol id="i-phone" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></symbol>
+      <symbol id="i-pin" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M12 21s-7-6.2-7-12a7 7 0 0 1 14 0c0 5.8-7 12-7 12zm0-9.5a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5"/></symbol>
+      <symbol id="i-gh" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.45-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.61.07-.61 1 .07 1.53 1.03 1.53 1.03.89 1.53 2.34 1.09 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.02a9.6 9.6 0 0 1 5 0c1.910-1.29 2.75-1.02 2.75-1.02.55 1.38.2 2.4.1 2.65.64.7 1.03 1.59 1.03 2.68 0 3.840-2.34 4.68-4.57 4.93.36.31.68.92.68 1.85v2.74c0 .27.18.58.69.48A10 10 0 0 0 12 2"/></symbol>
+      <symbol id="i-search" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M11 18a7 7 0 1 0 0-14 7 7 0 0 0 0 14zm9 2-4-4"/></symbol>
+      <symbol id="i-menu" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M4 7h16M4 12h16M4 17h16"/></symbol>
+      <symbol id="i-pad" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M6 11h4M8 9v4M15 12h.01M18 10h.01M17.3 5H6.7a4 4 0 0 0-4 3.6L2 15.3A3 3 0 0 0 5 18.6c1 0 1.9-.5 2.4-1.3L8.5 16h7l1.1 1.3a3 3 0 0 0 5.3-2l-.6-6.7A4 4 0 0 0 17.3 5"/></symbol>
+      <symbol id="i-cube" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" d="m12 2 9 5v10l-9 5-9-5V7zm0 10 9-5M12 12v10M12 12 3 7"/></symbol>
+      <symbol id="i-gauge" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M12 14l4-4M3.3 19a10 10 0 1 1 17.4 0"/></symbol>
+      <symbol id="i-coin" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20zM15 9.5c-.5-1-1.6-1.5-3-1.5-1.7 0-3 .9-3 2s1.3 1.7 3 2 3 .9 3 2-1.3 2-3 2c-1.4 0-2.5-.5-3-1.5M12 6v2m0 8v2"/></symbol>
+    </defs>
   </svg>
 
-  <header class="top">
+  <header class="top" id="top">
     <div class="wrap">
-      <a class="logo" href="#home">Muhammad Umair <span>· Game Developer</span></a>
-      <button class="menu" id="menu" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav"><svg class="icon"><use href="#i-menu"/></svg></button>
+      <a class="logo" href="#home" aria-label="Muhammad Umair, home"><span class="mark">MU</span><span>Muhammad Umair</span></a>
+      <button class="menu" id="menu" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav"><svg class="ic"><use href="#i-menu"/></svg></button>
       <nav id="nav" aria-label="Primary">
         <a href="#about">About</a>
         <a href="#experience">Experience</a>
-        <a href="#work">Work</a>
-        <a href="#skills">Skills</a>
+        <a href="#work">Games</a>
         <a href="#education">Education</a>
         <a href="#contact">Contact</a>
-        <a class="btn" href="Resume.pdf" download><svg class="icon"><use href="#i-dl"/></svg>Résumé</a>
+        <a class="btn" href="Resume.pdf" download><svg class="ic"><use href="#i-dl"/></svg>Résumé</a>
       </nav>
     </div>
   </header>
 
   <main id="home">
+    <!-- Hero -->
     <section class="hero">
       <div class="wrap">
         <div class="hero-grid">
           <div>
-            <div class="kicker"><span class="dot"></span>Unity Game Developer · Rawalpindi, Pakistan</div>
-            <h1>Muhammad Umair<br><em>builds mobile games people play.</em></h1>
-            <p class="lead">Unity and C# developer with over four years of studio experience, shipping simulation, action and casual titles to Google Play — from gameplay systems and level design to optimization and ad monetization.</p>
-            <div class="actions">
-              <a class="btn primary" href="#work">View published games</a>
-              <a class="btn" href="Resume.pdf" download><svg class="icon"><use href="#i-dl"/></svg>Download résumé</a>
+            <span class="pill rv"><img src="imgs/IMG-20211116-WA0002.webp" alt="" width="28" height="28"><span class="live"></span>Open to new opportunities</span>
+            <h1 class="rv">Unity Game Developer shipping games played by <span class="hl">millions.</span></h1>
+            <p class="lead rv">I'm <strong style="color:var(--ink)">Muhammad Umair</strong>, a game developer from Rawalpindi, Pakistan with 4+ years of studio experience building simulation, action and casual games for Android — from gameplay systems to release and live updates.</p>
+            <div class="actions rv">
+              <a class="btn primary" href="#work">View my games<svg class="ic"><use href="#i-down"/></svg></a>
+              <a class="btn" href="Resume.pdf" download><svg class="ic"><use href="#i-dl"/></svg>Download résumé</a>
             </div>
           </div>
-          <img class="portrait" src="imgs/IMG-20211116-WA0002.webp" alt="Portrait of Muhammad Umair" width="200" height="250">
+          <div class="mosaic rv" id="mosaic" aria-hidden="true"></div>
         </div>
-        <div class="facts">
-          <div class="fact"><b>4+ yrs</b><span>Professional experience</span></div>
-          <div class="fact"><b id="statTitles">35+</b><span>Published titles</span></div>
-          <div class="fact"><b>13M+</b><span>Combined installs</span></div>
-          <div class="fact"><b>6</b><span>Game studios</span></div>
-        </div>
-      </div>
-    </section>
 
-    <section class="block" id="about">
-      <div class="wrap row">
-        <div class="label"><div class="stick"><span class="n">01</span>About</div></div>
-        <div>
-          <h2>Focused on game feel, stability and performance.</h2>
-          <p>I am a Unity game developer specialising in mobile games for Android. My work covers player, camera and vehicle (RCC) controllers, enemy AI, game flow, level design and UI implementation, as well as build-size and performance optimization for low- and mid-range devices.</p>
-          <p>I have also handled live-operations work on published titles — Google AdMob integration, ad mediation and user-consent (GDPR/UMP) updates — and have taken projects from an empty scene to a Play Store release.</p>
-          <dl class="details">
-            <div><dt>Location</dt><dd>Rawalpindi, Pakistan</dd></div>
-            <div><dt>Education</dt><dd>BS Computer Science, UET Taxila</dd></div>
-            <div><dt>Primary stack</dt><dd>Unity · C# · Android</dd></div>
-            <div><dt>Languages</dt><dd>English, Urdu</dd></div>
-          </dl>
+        <div class="stats rv">
+          <div class="stat"><b>13M+</b><span>Combined installs</span></div>
+          <div class="stat"><b id="sTitles">35+</b><span>Published titles</span></div>
+          <div class="stat"><b>4+ yrs</b><span>Professional experience</span></div>
+          <div class="stat"><b>6</b><span>Game studios</span></div>
         </div>
       </div>
+      <div class="strip" aria-hidden="true"><div class="track" id="track"></div></div>
     </section>
 
-    <section class="block" id="experience">
-      <div class="wrap row">
-        <div class="label"><div class="stick"><span class="n">02</span>Experience</div></div>
-        <ol class="jobs">
-          <li class="job"><h3>The PlayMax Group<span class="now">Current</span></h3><span class="when">Jan 2026 – Present</span><span class="role">Game Developer</span><p>Unity development of mobile games, focusing on gameplay systems, production-ready features and optimization.</p></li>
-          <li class="job"><h3>Five River Solutions (Pvt) Ltd</h3><span class="when">Apr 2024 – Dec 2025</span><span class="role">Game Developer</span><p>Developed and updated animal-simulation titles with 500K–1M+ installs each: player and camera controllers, enemy AI, AdMob integration and consent-form compliance.</p></li>
-          <li class="job"><h3>Ah Games Studio</h3><span class="when">May 2023 – May 2024</span><span class="role">Game Developer</span><p>Built simulation games, implemented AI systems and improved runtime performance.</p></li>
-          <li class="job"><h3>Incignite</h3><span class="when">May 2023 – Oct 2023</span><span class="role">Game Developer</span><p>Developed a bus-simulation game on the RCC vehicle controller, including build-size and performance optimization.</p></li>
-          <li class="job"><h3>7 Vision Tech</h3><span class="when">Jan 2023 – Apr 2023</span><span class="role">Game Developer</span><p>Worked on car-parking, monster-truck and bull-fighting titles — the latter reaching 5M+ installs.</p></li>
-          <li class="job"><h3>MADinc</h3><span class="when">May 2022 – Dec 2022</span><span class="role">Game Developer</span><p>Began professional game development, building games in the Unity engine.</p></li>
-        </ol>
-      </div>
-    </section>
-
-    <section class="block" id="work">
-      <div class="wrap row">
-        <div class="label"><div class="stick"><span class="n">03</span>Work</div></div>
-        <div>
-          <h2>Selected games</h2>
-          <p class="muted">Install counts are taken from the public Google Play listings.</p>
-          <div class="featured" id="featured"></div>
-
-          <div class="toolbar">
-            <div class="chips" role="group" aria-label="Filter by genre" id="chips"></div>
-            <label class="search"><svg class="icon"><use href="#i-search"/></svg><input id="q" type="search" placeholder="Search games" aria-label="Search games"></label>
+    <!-- About -->
+    <section class="sec" id="about">
+      <div class="wrap">
+        <div class="head rv"><div><span class="eyebrow">About me</span><h2>Building games that feel good and run smoothly.</h2></div></div>
+        <div class="about">
+          <div class="about-text rv">
+            <p>I turn game ideas into polished, playable products — and keep improving them after launch.</p>
+            <p>My work covers player, camera and vehicle (RCC) controllers, enemy AI, game flow, level design and UI, along with build-size and performance optimization for a wide range of Android devices.</p>
+            <p>On live titles I have handled Google AdMob, ad mediation and GDPR consent updates, and I have taken projects from an empty scene all the way to a Google Play release.</p>
+            <div class="info">
+              <div><small>Location</small><span>Rawalpindi, Pakistan</span></div>
+              <div><small>Degree</small><span>BS Computer Science</span></div>
+              <div><small>Core stack</small><span>Unity · C# · Android</span></div>
+              <div><small>Languages</small><span>English · Urdu</span></div>
+            </div>
           </div>
-          <div id="groups"></div>
-          <p class="empty" id="empty">No games match your search.</p>
+          <div class="rv">
+            <div class="caps">
+              <div class="cap"><div class="ico"><svg class="ic"><use href="#i-pad"/></svg></div><h3>Gameplay systems</h3><p>Player, camera and RCC vehicle controllers, weapons and enemy AI.</p></div>
+              <div class="cap"><div class="ico"><svg class="ic"><use href="#i-cube"/></svg></div><h3>Levels &amp; UI</h3><p>Level design, game flow and clean in-game UI for mobile.</p></div>
+              <div class="cap"><div class="ico"><svg class="ic"><use href="#i-gauge"/></svg></div><h3>Optimization</h3><p>Smaller builds and stable frame rates on low-end devices.</p></div>
+              <div class="cap"><div class="ico"><svg class="ic"><use href="#i-coin"/></svg></div><h3>Monetization</h3><p>AdMob, mediation and consent (UMP) on live games.</p></div>
+            </div>
+            <div class="tags">
+              <span class="tag">Unity 2D / 3D</span><span class="tag">C#</span><span class="tag">Android</span><span class="tag">RCC</span><span class="tag">AI Systems</span><span class="tag">Level Design</span><span class="tag">UI / UX</span><span class="tag">AdMob</span><span class="tag">Git</span>
+            </div>
+          </div>
         </div>
       </div>
     </section>
 
-    <section class="block" id="skills">
-      <div class="wrap row">
-        <div class="label"><div class="stick"><span class="n">04</span>Skills</div></div>
-        <div class="skills">
-          <div><h3>Engine &amp; languages</h3><p>Unity (2D &amp; 3D), C#, Android build pipeline, Git</p></div>
-          <div><h3>Gameplay</h3><p>Player, camera &amp; RCC vehicle controllers, weapon systems, enemy AI, game flow</p></div>
-          <div><h3>Content &amp; UI</h3><p>Level design, in-game UI implementation, hyper-casual and simulation design</p></div>
-          <div><h3>Live operations</h3><p>Google AdMob, ad mediation, GDPR/UMP consent, build-size &amp; performance optimization</p></div>
+    <!-- Experience -->
+    <section class="sec" id="experience" style="padding-top:0">
+      <div class="wrap">
+        <div class="head rv"><div><span class="eyebrow">Experience</span><h2>Six studios, four years of shipped games.</h2></div></div>
+        <div class="exp">
+          <article class="job rv"><span class="when">Jan 2026 — Present</span><div><h3>The PlayMax Group</h3><span class="role">Game Developer</span><p>Developing Unity mobile games with a focus on gameplay systems, production-ready features and optimization.</p></div><span class="badge">Current</span></article>
+          <article class="job rv"><span class="when">Apr 2024 — Dec 2025</span><div><h3>Five River Solutions</h3><span class="role">Game Developer</span><p>Built and updated animal-simulation games with 100K–1M+ installs each — player and camera controllers, enemy AI, AdMob integration and consent compliance.</p></div><span></span></article>
+          <article class="job rv"><span class="when">May 2023 — May 2024</span><div><h3>Ah Games Studio</h3><span class="role">Game Developer</span><p>Developed simulation games, implemented AI systems and improved game performance.</p></div><span></span></article>
+          <article class="job rv"><span class="when">May 2023 — Oct 2023</span><div><h3>Incignite</h3><span class="role">Game Developer</span><p>Built a bus-simulation game on the RCC controller, with build-size and performance optimization.</p></div><span></span></article>
+          <article class="job rv"><span class="when">Jan 2023 — Apr 2023</span><div><h3>7 Vision Tech</h3><span class="role">Game Developer</span><p>Worked on car-parking and monster-truck games — RCC controller, level design and UI.</p></div><span></span></article>
+          <article class="job rv"><span class="when">May 2022 — Dec 2022</span><div><h3>MADinc</h3><span class="role">Game Developer</span><p>Began my professional career, developing games in the Unity engine.</p></div><span></span></article>
         </div>
       </div>
     </section>
 
-    <section class="block" id="education">
-      <div class="wrap row">
-        <div class="label"><div class="stick"><span class="n">05</span>Education</div></div>
-        <ul class="edu">
-          <li><b>BS Computer Science</b><span>University of Engineering &amp; Technology (UET), Taxila</span></li>
-          <li><b>FSc Pre-Engineering</b><span>Manjan Bazam Cadet College, Ghazi Campus, Tarbela Cantt.</span></li>
-          <li><b>Matriculation</b><span>F.G. Boys High School No. 1, Tariqabad, Rawalpindi</span></li>
-        </ul>
+    <!-- Games -->
+    <section class="sec work-bg" id="work">
+      <div class="wrap">
+        <div class="head rv">
+          <div><span class="eyebrow">Published games</span><h2>Games I've built and shipped.</h2></div>
+          <p class="sub">Every title links to its live Google Play page. Install counts are taken from the public store listings.</p>
+        </div>
+        <div class="filters rv">
+          <div class="tabs" role="tablist" aria-label="Filter games" id="tabs"></div>
+          <label class="search"><svg class="ic"><use href="#i-search"/></svg><input id="q" type="search" placeholder="Search games…" aria-label="Search games"></label>
+        </div>
+        <div class="grid" id="grid"></div>
+        <p class="none" id="none">No games match your search.</p>
+        <div class="more"><button class="btn" id="moreBtn" type="button">Show all games</button></div>
+        <div class="older rv"><b>Earlier work, no longer on Google Play:</b><span>Public Bus: Transport Game</span><span>Car Parking 3D</span><span>Monster Truck 3D Stunt</span><span>Sniper 3D: Gun Shooting</span></div>
       </div>
     </section>
 
-    <section class="block" id="contact">
-      <div class="wrap row">
-        <div class="label"><div class="stick"><span class="n">06</span>Contact</div></div>
-        <div>
-          <h2>Get in touch</h2>
-          <p class="muted">Open to full-time roles, contract work and collaboration.</p>
-          <div class="contact">
-            <a href="mailto:umairniazi5556@gmail.com"><svg class="icon"><use href="#i-mail"/></svg><span><small>Email</small><span class="v">umairniazi5556@gmail.com</span></span></a>
-            <a href="tel:+923161755475"><svg class="icon"><use href="#i-phone"/></svg><span><small>Phone</small><span class="v">+92 316 1755475</span></span></a>
-            <a href="https://github.com/umairniazigit" target="_blank" rel="noopener"><svg class="icon"><use href="#i-gh"/></svg><span><small>GitHub</small><span class="v">github.com/umairniazigit</span></span></a>
-            <div><svg class="icon"><use href="#i-pin"/></svg><span><small>Location</small><span class="v">Rawalpindi, Pakistan</span></span></div>
+    <!-- Education -->
+    <section class="sec" id="education">
+      <div class="wrap">
+        <div class="head rv"><div><span class="eyebrow">Education</span><h2>Academic background.</h2></div></div>
+        <div class="edu">
+          <div class="edu-card rv"><span class="lvl">Bachelor's</span><h3>BS Computer Science</h3><p>University of Engineering &amp; Technology (UET), Taxila</p></div>
+          <div class="edu-card rv"><span class="lvl">Intermediate</span><h3>FSc Pre-Engineering</h3><p>Manjan Bazam Cadet College, Ghazi Campus, Tarbela Cantt.</p></div>
+          <div class="edu-card rv"><span class="lvl">Matriculation</span><h3>Science</h3><p>F.G. Boys High School No. 1, Tariqabad, Rawalpindi</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section class="sec" id="contact" style="padding-top:0">
+      <div class="wrap">
+        <div class="cta rv">
+          <span class="eyebrow" style="color:#8ea5ff">Contact</span>
+          <h2>Let's build something people love to play.</h2>
+          <p class="sub">Available for full-time roles, contract projects and collaborations. I usually reply within a day.</p>
+          <div class="links">
+            <a href="mailto:umairniazi5556@gmail.com"><span class="ico"><svg class="ic"><use href="#i-mail"/></svg></span><span><small>Email</small><span class="v">umairniazi5556@gmail.com</span></span></a>
+            <a href="tel:+923161755475"><span class="ico"><svg class="ic"><use href="#i-phone"/></svg></span><span><small>Phone</small><span class="v">+92 316 1755475</span></span></a>
+            <a href="https://github.com/umairniazigit" target="_blank" rel="noopener"><span class="ico"><svg class="ic"><use href="#i-gh"/></svg></span><span><small>GitHub</small><span class="v">github.com/umairniazigit</span></span></a>
+            <div><span class="ico"><svg class="ic"><use href="#i-pin"/></svg></span><span><small>Location</small><span class="v">Rawalpindi, Pakistan</span></span></div>
           </div>
         </div>
       </div>
     </section>
   </main>
 
-  <footer><div class="wrap"><span>© <span id="year">2026</span> Muhammad Umair</span><a href="#home">Back to top ↑</a></div></footer>
+  <footer><div class="wrap"><span>© <span id="year">2026</span> Muhammad Umair · Unity Game Developer</span><a href="#home">Back to top ↑</a></div></footer>
 
   <script>
-    // g: genre filter · d: installs on Google Play · p: publisher account · n: note · off: no longer listed
+    // g: genre · d: Google Play installs · p: publisher account · n: role / summary · top: shown before "Show all"
     const PLAY = 'https://play.google.com/store/apps/details?id=';
     const GAMES = [
-      // Recent releases
-      {id:'com.uz.brainrot.steal.game',t:'Steal a Brainrot',g:'Action & Adventure',d:'10K+',p:'R&D Advisors SMC-Private Limited',n:'3D adventure — sneak in, grab and escape',r:1},
-      {id:'com.uz.chase.police.simulator.game',t:'Police Simulator: Patrol Cars',g:'Simulation',d:'10K+',p:'R&D Advisors SMC-Private Limited',n:'Open-city police patrol and pursuit simulator',r:1},
-      {id:'com.uz.shadow.courier.game',t:'Pizza Shop: Double Life Sim',g:'Simulation',d:'100+',p:'R&D Advisors SMC-Private Limited',n:'Shop management and life simulation',r:1},
-      {id:'com.uz.dinocity.adventure.game',t:'Dino Adventure Simulator',g:'Action & Adventure',d:'50K+',p:'GITEX Energy Trading',n:'Open-world dinosaur adventure',r:1},
-      {id:'com.uz.galaxy.space.sandbox.simulator',t:'NextBot Sandbox In Space: Mod',g:'Simulation',d:'50K+',p:'GITEX Energy Trading',n:'Physics sandbox set in space',r:1},
-      {id:'com.doctor.petanimalcare.game',t:'Junkyard Shredder',g:'Simulation',d:'1K+',p:'GITEX Energy Trading',n:'Physics-based shredding simulator',r:1},
-      {id:'com.uz.goingupballs.rollingrace.game',t:'Going Balls: Rolling Race',g:'Casual & Puzzle',d:'1K+',p:'GITEX Energy Trading',n:'Ball-rolling obstacle race',r:1},
-      {id:'com.sizadevelopers.aim_trainer',t:'Aim Trainer',g:'Casual & Puzzle',d:'1K+',p:'GITEX Energy Trading',n:'Arcade reflex and accuracy trainer',r:1},
-      {id:'com.lemon.sell.obby.parkour',t:'Smash Fest: Break and Blast',g:'Casual & Puzzle',d:'10K+',p:'Mobile Accessories Hub (Pvt) Ltd',n:'Casual destruction game',r:1},
-      {id:'com.uz.spider.game.mafia.rope.hero.open.world',t:'Spider Mafia Rope Hero Game',g:'Action & Adventure',d:'1K+',p:"B&M Brothers Property's Dealers (Pvt) Ltd",n:'Open-world rope-hero action',r:1},
-      {id:'com.uz.arrows.escape.puzzle',t:'Super Speed Hero: Flash 3D',g:'Action & Adventure',d:'100+',p:"B&M Brothers Property's Dealers (Pvt) Ltd",n:'Super-speed hero action',r:1},
-      {id:'com.past.echos.ghost',t:'The Mother of Monster',g:'Action & Adventure',d:'100+',p:"B&M Brothers Property's Dealers (Pvt) Ltd",n:'Horror adventure',r:1},
-      {id:'com.uz.gtmaga.ramp.car.stunt.game',t:'GT Car Extreme: Ramp Car Stunt',g:'Racing',d:'1K+',p:'Vape Play SMC-Private Limited',n:'Mega-ramp car stunts',r:1},
-      {id:'com.uz.rule.master.puzzle',t:'Rule Master',g:'Casual & Puzzle',d:'New',p:'Vape Play SMC-Private Limited',n:'Logic puzzle game',r:1},
-      {id:'com.uz.memory.path.puzzle',t:'Graveyard Manager',g:'Simulation',d:'100+',p:'Haven Developers (Pvt) Ltd',n:'Management simulation',r:1},
-      {id:'com.uz.wild.panther.open.world.family.sim',t:'Wild Panther: Family Simulator',g:'Simulation',d:'100+',p:'Haven Developers (Pvt) Ltd',n:'Open-world animal family simulator',r:1},
-      {id:'com.bluebear.clean.easy.wrting.textclear',t:'Clean Text And Easy Writer',g:'Apps',d:'100+',p:'Blue Bear Studio',n:'Text-cleaning and writing utility',r:1},
-      // Studio titles
-      {id:'com.taycoongames.bullfighter.offline.game',t:'Bull Fighting Game: Bull Games',g:'Action & Adventure',d:'5M+',p:'Taycoon Games',n:'Controller, game flow, size and performance optimization'},
-      {id:'com.frs.werewolf.survival.hunting',t:'Forest Wild Werewolf Hunting',g:'Simulation',d:'1M+',p:'Five River Solutions',n:'Built from scratch to release'},
-      {id:'com.frs.wildcrocodile.attack.simulator2019',t:'Crocodile Games Animal Sim 3D',g:'Simulation',d:'1M+',p:'Five River Solutions',n:'Player & camera controller, AdMob and consent form'},
-      {id:'com.frs.anaconda.angrySnake.Simulator',t:'Snake Simulator: Snake Games',g:'Simulation',d:'1M+',p:'Five River Solutions',n:'Player & camera controller, ad mediation'},
-      {id:'com.frs.anaconda.snakeattack.simulator',t:'Angry Anaconda Simulator Games',g:'Simulation',d:'1M+',p:'Five River Solutions',n:'Player & camera controller, AdMob and consent form'},
-      {id:'com.frs.dog.petsimulator.games',t:'Pitbull Games: Fight Dogs Game',g:'Simulation',d:'1M+',p:'Five River Solutions',n:'Feature updates and maintenance'},
-      {id:'com.frs.kittenCat.petSimulator.games',t:'Pet Cat Simulator Kitty Games',g:'Simulation',d:'1M+',p:'Five River Solutions',n:'Animal simulation — feature updates'},
-      {id:'com.frs.forest.gorilla.simulator',t:'Wild Forest Gorilla Games',g:'Simulation',d:'500K+',p:'Five River Solutions',n:'Player & camera controller, AdMob and consent form'},
-      {id:'com.frs.bullattack.fighting.bullgames',t:'Wild Battle Craft Bull Games',g:'Simulation',d:'500K+',p:'Five River Solutions',n:'Player & camera controller, AdMob and consent form'},
-      {id:'com.frs.furydragon.attack.simulator',t:'Flying Dragon Simulator Games',g:'Simulation',d:'500K+',p:'Five River Solutions',n:'Google Mobile Ads mediation'},
-      {id:'com.frs.wildwolf.animal.simulator',t:'Wolf Simulator Animal Games',g:'Simulation',d:'500K+',p:'Five River Solutions',n:'Feature updates and maintenance'},
-      {id:'com.frs.wildanimal.cheetah.simulator',t:'Wild Cheetah Offline Sim Game',g:'Simulation',d:'100K+',p:'Five River Solutions',n:'Player & camera controller, AdMob and consent form'},
-      {id:'com.frs.antsimulator.insect.games',t:'Ants Army Simulator: Ant Games',g:'Simulation',d:'100K+',p:'Five River Solutions',n:'Player & camera controller, AdMob and consent form'},
-      {id:'com.frs.scorpion.familysimulator.game',t:'Wild Scorpion Life Simulator',g:'Simulation',d:'100K+',p:'Five River Solutions',n:'Enemy AI system, AdMob and consent form'},
-      {id:'com.frs.mouse.simulator.ratlife',t:'Mouse Animal Life Simulator',g:'Simulation',d:'100K+',p:'Five River Solutions',n:'Feature updates and maintenance'},
-      {id:'com.incignite.bussimulator.busgames.busdrivinggames',t:'Public Bus: Transport Game',g:'Racing',p:'Incignite',n:'RCC bus simulation, size and performance optimization',off:1,img:'imgs/unnamed.webp'},
-      {id:'com.funrealms.carparking.games.parking.car.game',t:'Car Parking 3D: Car Games',g:'Racing',p:'7 Vision Tech',n:'RCC controller, level design and UI',off:1,img:'imgs/unnamed (1).webp'},
-      {id:'com.funrealms.monster.truck.simulator.game',t:'Monster Truck Games — 3D Stunt',g:'Racing',p:'7 Vision Tech',n:'RCC controller, level design and UI',off:1},
-      {id:'com.action.game.best.sniper.gun.shooting.games.pure.sniper3d',t:'Sniper 3D: Gun Shooting Games',g:'Action & Adventure',p:'—',n:'Player controller and weapon system',off:1}
+      {id:'com.taycoongames.bullfighter.offline.game',t:'Bull Fighting Game: Bull Games',g:'Action',d:'5M+',p:'Taycoon Games',n:'Gameplay controller, game flow, build-size and performance optimization.'},
+      {id:'com.frs.werewolf.survival.hunting',t:'Forest Wild Werewolf Hunting',g:'Simulation',d:'1M+',p:'Five River Solutions',n:'Developed the complete game from scratch through to release.'},
+      {id:'com.frs.wildcrocodile.attack.simulator2019',t:'Crocodile Games Animal Sim 3D',g:'Simulation',d:'1M+',p:'Five River Solutions',n:'Player and camera controllers, AdMob update and consent form.'},
+      {id:'com.uz.dinocity.adventure.game',t:'Dino Adventure Simulator',g:'Action',d:'50K+',p:'GITEX Energy Trading',n:'Open-world dinosaur adventure built in Unity.'},
+      {id:'com.uz.galaxy.space.sandbox.simulator',t:'NextBot Sandbox In Space: Mod',g:'Simulation',d:'50K+',p:'GITEX Energy Trading',n:'Physics sandbox set in outer space.'},
+      {id:'com.uz.brainrot.steal.game',t:'Steal a Brainrot',g:'Action',d:'10K+',p:'R&D Advisors SMC-Pvt Ltd',n:'3D stealth adventure — sneak in, grab and escape.'},
+      {id:'com.frs.anaconda.angrySnake.Simulator',t:'Snake Simulator: Snake Games',g:'Simulation',d:'1M+',p:'Five River Solutions',n:'Player and camera controllers with Google Ads mediation.'},
+      {id:'com.frs.anaconda.snakeattack.simulator',t:'Angry Anaconda Simulator',g:'Simulation',d:'1M+',p:'Five River Solutions',n:'Player and camera controllers, AdMob update and consent form.'},
+      {id:'com.frs.dog.petsimulator.games',t:'Pitbull Games: Fight Dogs Game',g:'Simulation',d:'1M+',p:'Five River Solutions',n:'Feature updates and live maintenance.'},
+      {id:'com.frs.kittenCat.petSimulator.games',t:'Pet Cat Simulator Kitty Games',g:'Simulation',d:'1M+',p:'Five River Solutions',n:'Feature updates and live maintenance.'},
+      {id:'com.frs.forest.gorilla.simulator',t:'Wild Forest Gorilla Games',g:'Simulation',d:'500K+',p:'Five River Solutions',n:'Player and camera controllers, AdMob update and consent form.'},
+      {id:'com.frs.bullattack.fighting.bullgames',t:'Wild Battle Craft Bull Games',g:'Simulation',d:'500K+',p:'Five River Solutions',n:'Player and camera controllers, AdMob update and consent form.'},
+      {id:'com.frs.furydragon.attack.simulator',t:'Flying Dragon Simulator',g:'Simulation',d:'500K+',p:'Five River Solutions',n:'Integrated Google Mobile Ads mediation.'},
+      {id:'com.frs.wildwolf.animal.simulator',t:'Wolf Simulator Animal Games',g:'Simulation',d:'500K+',p:'Five River Solutions',n:'Feature updates and live maintenance.'},
+      {id:'com.frs.wildanimal.cheetah.simulator',t:'Wild Cheetah Offline Sim',g:'Simulation',d:'100K+',p:'Five River Solutions',n:'Player and camera controllers, AdMob update and consent form.'},
+      {id:'com.frs.antsimulator.insect.games',t:'Ants Army Simulator',g:'Simulation',d:'100K+',p:'Five River Solutions',n:'Player and camera controllers, AdMob update and consent form.'},
+      {id:'com.frs.scorpion.familysimulator.game',t:'Wild Scorpion Life Simulator',g:'Simulation',d:'100K+',p:'Five River Solutions',n:'Built the enemy AI system; AdMob update and consent form.'},
+      {id:'com.frs.mouse.simulator.ratlife',t:'Mouse Animal Life Simulator',g:'Simulation',d:'100K+',p:'Five River Solutions',n:'Feature updates and live maintenance.'},
+      {id:'com.uz.chase.police.simulator.game',t:'Police Simulator: Patrol Cars',g:'Simulation',d:'10K+',p:'R&D Advisors SMC-Pvt Ltd',n:'Open-city police patrol and pursuit simulator.'},
+      {id:'com.lemon.sell.obby.parkour',t:'Smash Fest: Break and Blast',g:'Casual',d:'10K+',p:'Mobile Accessories Hub (Pvt) Ltd',n:'Casual physics destruction game.',v:1},
+      {id:'com.uz.spider.game.mafia.rope.hero.open.world',t:'Spider Mafia Rope Hero',g:'Action',d:'1K+',p:"B&M Brothers Property's Dealers",n:'Open-world rope-hero action game.'},
+      {id:'com.uz.gtmaga.ramp.car.stunt.game',t:'GT Car Extreme: Ramp Car Stunt',g:'Racing',d:'1K+',p:'Vape Play SMC-Pvt Ltd',n:'Mega-ramp car stunt racing.'},
+      {id:'com.doctor.petanimalcare.game',t:'Junkyard Shredder',g:'Simulation',d:'1K+',p:'GITEX Energy Trading',n:'Physics-based shredding simulator.',v:1},
+      {id:'com.uz.goingupballs.rollingrace.game',t:'Going Balls: Rolling Race',g:'Casual',d:'1K+',p:'GITEX Energy Trading',n:'Ball-rolling obstacle race.',v:1},
+      {id:'com.sizadevelopers.aim_trainer',t:'Aim Trainer',g:'Casual',d:'1K+',p:'GITEX Energy Trading',n:'Arcade reflex and accuracy trainer.',v:1},
+      {id:'com.uz.shadow.courier.game',t:'Pizza Shop: Double Life Sim',g:'Simulation',d:'100+',p:'R&D Advisors SMC-Pvt Ltd',n:'Shop management and life simulation.'},
+      {id:'com.uz.arrows.escape.puzzle',t:'Super Speed Hero: Flash 3D',g:'Action',d:'100+',p:"B&M Brothers Property's Dealers",n:'Super-speed hero action game.'},
+      {id:'com.past.echos.ghost',t:'The Mother of Monster',g:'Action',d:'100+',p:"B&M Brothers Property's Dealers",n:'Atmospheric horror adventure.'},
+      {id:'com.uz.memory.path.puzzle',t:'Graveyard Manager',g:'Simulation',d:'100+',p:'Haven Developers (Pvt) Ltd',n:'Management simulation game.'},
+      {id:'com.uz.wild.panther.open.world.family.sim',t:'Wild Panther: Family Simulator',g:'Simulation',d:'100+',p:'Haven Developers (Pvt) Ltd',n:'Open-world animal family simulator.'},
+      {id:'com.uz.rule.master.puzzle',t:'Rule Master',g:'Casual',d:'New',p:'Vape Play SMC-Pvt Ltd',n:'Logic puzzle game.',v:1},
+      {id:'com.bluebear.clean.easy.wrting.textclear',t:'Clean Text And Easy Writer',g:'Apps',d:'100+',p:'Blue Bear Studio',n:'Text-cleaning and writing utility app.',v:1}
     ];
-    const JPG = new Set(['com.frs.anaconda.angrySnake.Simulator','com.frs.bullattack.fighting.bullgames','com.frs.forest.gorilla.simulator','com.frs.furydragon.attack.simulator','com.frs.wildanimal.cheetah.simulator','com.frs.wildcrocodile.attack.simulator2019']);
-    const FEATURED = ['com.taycoongames.bullfighter.offline.game','com.frs.werewolf.survival.hunting','com.frs.wildcrocodile.attack.simulator2019','com.uz.dinocity.adventure.game','com.uz.galaxy.space.sandbox.simulator','com.uz.brainrot.steal.game'];
-    const GENRES = ['All','Simulation','Action & Adventure','Casual & Puzzle','Racing','Apps'];
+    const JPG_ICON = new Set(['com.frs.anaconda.angrySnake.Simulator','com.frs.bullattack.fighting.bullgames','com.frs.forest.gorilla.simulator','com.frs.furydragon.attack.simulator','com.frs.wildanimal.cheetah.simulator','com.frs.wildcrocodile.attack.simulator2019']);
+    const TABS = ['All','Simulation','Action','Casual','Racing','Apps'];
+    const FIRST = 9;
 
-    const esc = s => s.replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-    const icon = g => g.img || (g.off ? null : `imgs/games/${g.id}.${JPG.has(g.id) ? 'jpg' : 'png'}`);
-    const thumb = (g, cls='') => { const src = icon(g); return src ? `<img ${cls} src="${esc(src)}" alt="" loading="lazy" width="44" height="44">` : `<span class="ph" aria-hidden="true">${esc(g.t.split(/\s+/).slice(0,2).map(w=>w[0]).join(''))}</span>`; };
-    const byId = Object.fromEntries(GAMES.map(g => [g.id, g]));
+    const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+    const iconOf = g => `imgs/games/${g.id}.${JPG_ICON.has(g.id) ? 'jpg' : 'png'}`;
+    const shotOf = g => `imgs/shots/${g.id}.jpg`;
+    const big = d => /M\+$/.test(d);
 
-    document.getElementById('featured').innerHTML = FEATURED.map(id => {
-      const g = byId[id];
-      return `<a class="feat" href="${PLAY + g.id}" target="_blank" rel="noopener">${thumb(g)}<h3>${esc(g.t)}</h3><p>${esc(g.n)}</p><div class="meta"><span>${esc(g.g)}</span><span><b>${esc(g.d)}</b> installs</span></div></a>`;
+    // Hero: icon mosaic + screenshot strip
+    document.getElementById('mosaic').innerHTML = GAMES.slice(0, 12).map(g => `<img src="${iconOf(g)}" alt="" width="120" height="120">`).join('');
+    const stripImgs = GAMES.filter(g => !g.v).slice(0, 14).map(g => `<img src="${shotOf(g)}" alt="" loading="lazy" width="267" height="150">`).join('');
+    document.getElementById('track').innerHTML = stripImgs + stripImgs;
+    document.getElementById('sTitles').textContent = Math.floor((GAMES.length + 4) / 5) * 5 + '+';
+
+    // Games grid
+    let tab = 'All', expanded = false;
+    const grid = document.getElementById('grid'), q = document.getElementById('q'), moreBtn = document.getElementById('moreBtn');
+    const tabsEl = document.getElementById('tabs');
+    tabsEl.innerHTML = TABS.map(t => {
+      const n = t === 'All' ? GAMES.length : GAMES.filter(g => g.g === t).length;
+      return `<button class="tab" role="tab" type="button" aria-selected="${t === 'All'}" data-t="${t}">${t}<span class="c">${n}</span></button>`;
     }).join('');
-
-    document.getElementById('statTitles').textContent = (Math.floor(GAMES.length / 5) * 5) + '+';
-
-    let genre = 'All';
-    const chips = document.getElementById('chips');
-    chips.innerHTML = GENRES.map(x => `<button class="chip" type="button" aria-pressed="${x==='All'}" data-g="${esc(x)}">${esc(x)}</button>`).join('');
-    chips.addEventListener('click', e => {
-      const b = e.target.closest('.chip'); if (!b) return;
-      genre = b.dataset.g;
-      chips.querySelectorAll('.chip').forEach(c => c.setAttribute('aria-pressed', c === b));
+    tabsEl.addEventListener('click', e => {
+      const b = e.target.closest('.tab'); if (!b) return;
+      tab = b.dataset.t;
+      tabsEl.querySelectorAll('.tab').forEach(x => x.setAttribute('aria-selected', x === b));
       render();
     });
-    const q = document.getElementById('q');
     q.addEventListener('input', render);
+    moreBtn.addEventListener('click', () => { expanded = true; render(); });
 
-    const row = g => `<li class="game">${thumb(g)}<span class="t"><b>${esc(g.t)}</b><small>${esc(g.n)} · ${esc(g.p)}</small></span><span class="dl">${g.off ? '' : esc(g.d) + '<small>installs</small>'}</span>${g.off ? '<span class="off">No longer listed</span>' : `<a class="go" href="${PLAY + g.id}" target="_blank" rel="noopener" aria-label="${esc(g.t)} on Google Play"><span class="go-t">Google Play</span><svg class="icon" style="width:13px;height:13px"><use href="#i-out"/></svg></a>`}</li>`;
+    const card = g => `
+      <article class="card">
+        <a class="shot${g.v ? ' portrait' : ''}" href="${PLAY + g.id}" target="_blank" rel="noopener" aria-label="${esc(g.t)} on Google Play" tabindex="-1">
+          ${g.v ? `<img class="bg" src="${shotOf(g)}" alt="" loading="lazy">` : ''}
+          <img class="fg" src="${shotOf(g)}" alt="${esc(g.t)} gameplay screenshot" loading="lazy" width="720" height="405">
+          ${big(g.d) ? '<span class="hot">Top title</span>' : ''}
+          <span class="dl">${g.d === 'New' ? 'New release' : esc(g.d) + ' installs'}</span>
+        </a>
+        <div class="body">
+          <img class="app" src="${iconOf(g)}" alt="" loading="lazy" width="56" height="56">
+          <h3>${esc(g.t)}</h3>
+          <span class="genre">${esc(g.g === 'Apps' ? 'Utility app' : g.g + ' game')}</span>
+          <p>${esc(g.n)}</p>
+          <div class="foot"><span class="pub" title="${esc(g.p)}">${esc(g.p)}</span><a href="${PLAY + g.id}" target="_blank" rel="noopener">Google Play<svg class="ic" style="width:15px;height:15px"><use href="#i-arrow"/></svg></a></div>
+        </div>
+      </article>`;
 
     function render(){
       const s = q.value.trim().toLowerCase();
-      const match = g => (genre === 'All' || g.g === genre) && (!s || (g.t + ' ' + g.n + ' ' + g.p + ' ' + g.g).toLowerCase().includes(s));
-      const sets = [
-        ['Recent releases', 'Published on client developer accounts', GAMES.filter(g => g.r && match(g))],
-        ['Studio titles', 'Built while employed at game studios', GAMES.filter(g => !g.r && match(g))]
-      ];
-      let total = 0;
-      document.getElementById('groups').innerHTML = sets.filter(x => x[2].length).map(([h, sub, list]) => {
-        total += list.length;
-        return `<div class="group-title"><h3>${h}</h3><span>${list.length} ${list.length === 1 ? 'title' : 'titles'} · ${sub}</span></div><ul class="games">${list.map(row).join('')}</ul>`;
-      }).join('');
-      document.getElementById('empty').style.display = total ? 'none' : 'block';
+      const list = GAMES.filter(g => (tab === 'All' || g.g === tab) && (!s || (g.t + ' ' + g.g + ' ' + g.p + ' ' + g.n).toLowerCase().includes(s)));
+      const limit = expanded || s || tab !== 'All' ? list.length : FIRST;
+      grid.innerHTML = list.slice(0, limit).map(card).join('');
+      document.getElementById('none').style.display = list.length ? 'none' : 'block';
+      moreBtn.parentElement.style.display = list.length > limit ? 'flex' : 'none';
+      moreBtn.textContent = `Show all ${list.length} games`;
     }
     render();
 
+    // Header, menu, reveal
+    const header = document.getElementById('top');
+    const onScroll = () => header.classList.toggle('scrolled', scrollY > 10);
+    addEventListener('scroll', onScroll, {passive:true}); onScroll();
     const menu = document.getElementById('menu'), nav = document.getElementById('nav');
-    menu.addEventListener('click', () => { const o = nav.classList.toggle('open'); menu.setAttribute('aria-expanded', o); });
+    menu.addEventListener('click', () => menu.setAttribute('aria-expanded', nav.classList.toggle('open')));
     nav.addEventListener('click', e => { if (e.target.closest('a')) { nav.classList.remove('open'); menu.setAttribute('aria-expanded', false); } });
+    const io = 'IntersectionObserver' in window ? new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), {threshold:.08}) : null;
+    document.querySelectorAll('.rv').forEach(el => io ? io.observe(el) : el.classList.add('in'));
     document.getElementById('year').textContent = new Date().getFullYear();
   </script>
 </body>
